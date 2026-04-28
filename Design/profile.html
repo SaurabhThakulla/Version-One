@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitCore Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #050812;
+  --bg-1: #081224;
+  --panel: #0d1526;
+  --panel-soft: #131f36;
+  --line: #273550;
+  --text: #ecf1ff;
+  --muted: #90a1c3;
+  --neon: #b8f84f;
+  --blue: #79bbff;
+  --radius: 22px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% -12%, #1d3b69 0%, rgba(29, 59, 105, 0) 42%),
+    radial-gradient(circle at 100% 22%, #103258 0%, rgba(16, 50, 88, 0) 36%),
+    linear-gradient(160deg, var(--bg-0), #060b17 62%, #041126 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 430px;
+  min-height: 100dvh;
+  padding: 20px 16px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app::before {
+  width: 320px;
+  height: 320px;
+  left: -200px;
+  top: 120px;
+  background: radial-gradient(circle, rgba(184, 248, 79, 0.2), rgba(184, 248, 79, 0));
+}
+
+.app::after {
+  width: 280px;
+  height: 280px;
+  right: -190px;
+  bottom: 120px;
+  background: radial-gradient(circle, rgba(121, 187, 255, 0.2), rgba(121, 187, 255, 0));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid #304366;
+  background: linear-gradient(170deg, rgba(26, 37, 64, 0.9), rgba(13, 22, 41, 0.92));
+  display: grid;
+  place-items: center;
+  color: #d8e2fa;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.page-title h1 {
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+.page-title p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.card {
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.9), rgba(9, 16, 32, 0.95));
+  border: 1px solid rgba(98, 120, 169, 0.24);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 36px rgba(2, 7, 15, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.profile-hero {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.avatar {
+  width: 74px;
+  height: 74px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f1808;
+  background: linear-gradient(145deg, #c4ff6c, #99de3a);
+  box-shadow: 0 16px 26px rgba(184, 248, 79, 0.28);
+}
+
+.user h2 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.user p {
+  font-size: 12px;
+  color: #9eb1d5;
+  margin-bottom: 8px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  border-radius: 999px;
+  border: 1px solid rgba(120, 183, 255, 0.34);
+  background: rgba(120, 183, 255, 0.12);
+  color: #8ec8ff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  padding: 14px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(104, 128, 176, 0.2);
+  background: rgba(10, 18, 35, 0.68);
+}
+
+.stat p {
+  font-size: 11px;
+  color: #98aac9;
+  margin-bottom: 6px;
+}
+
+.stat strong {
+  font-size: 22px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.goal,
+.prefs,
+.security,
+.achievements {
+  padding: 16px;
+}
+
+.goal h3,
+.prefs h3,
+.security h3,
+.achievements h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.goal p {
+  font-size: 12px;
+  color: #9caed0;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 99px;
+  background: #26344f;
+  overflow: hidden;
+}
+
+.progress > span {
+  display: block;
+  height: 100%;
+  width: 72%;
+  background: linear-gradient(90deg, #b8f84f, #95d439);
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(90, 114, 154, 0.25);
+}
+
+.switch-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.switch-row span {
+  font-size: 12px;
+  color: #a8b8d5;
+}
+
+.switch {
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid #35507f;
+  background: #0f203f;
+  position: relative;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  background: #9ab0d8;
+}
+
+.switch.on {
+  border-color: rgba(184, 248, 79, 0.35);
+  background: rgba(184, 248, 79, 0.18);
+}
+
+.switch.on::after {
+  left: 21px;
+  background: #b8f84f;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-row {
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(104, 128, 176, 0.22);
+  background: rgba(10, 18, 35, 0.58);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-row span {
+  font-size: 12px;
+  color: #a6b7d6;
+}
+
+.item-row strong {
+  font-size: 12px;
+  color: #dfe8fb;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 430px;
+  background: linear-gradient(180deg, rgba(6, 10, 20, 0), rgba(4, 8, 15, 0.98) 26%, rgba(4, 8, 15, 1) 100%);
+  padding: 8px 16px calc(14px + env(safe-area-inset-bottom));
+  z-index: 5;
+}
+
+.nav-shell {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 4px;
+}
+
+.item {
+  text-align: center;
+  color: #6f7ea0;
+  font-size: 12px;
+}
+
+.item .i {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.item.active {
+  color: var(--neon);
+}
+
+.fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  color: #081108;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #c4ff6c, #98df3b);
+  box-shadow: 0 16px 26px rgba(184, 248, 79, 0.35);
+}
+
+.fab svg {
+  width: 24px;
+  height: 24px;
+  stroke: #081108;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 430px) {
+  .app,
+  .bottom-nav {
+    width: 100%;
+  }
+
+  .app {
+    padding: 18px 14px 118px;
+  }
+}
+
+@media (max-width: 390px) {
+  .profile-hero {
+    grid-template-columns: 66px 1fr;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 66px;
+    height: 66px;
+    font-size: 24px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="content">
+    <header class="topbar">
+      <a class="icon-btn" href="index.html" aria-label="Go to home">&#8592;</a>
+      <div class="page-title">
+        <h1>Profile Dashboard</h1>
+        <p>Account and preferences</p>
+      </div>
+      <button class="icon-btn" aria-label="Settings">&#9881;</button>
+    </header>
+
+    <section class="card profile-hero">
+      <div class="avatar">AK</div>
+      <div class="user">
+        <h2>Alex Kim</h2>
+        <p>Premium Member</p>
+        <div class="badges">
+          <span class="badge">Level 7</span>
+          <span class="badge">28 day streak</span>
+          <span class="badge">4,120 tasks done</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <article class="card stat">
+        <p>Weekly Tasks</p>
+        <strong>82</strong>
+      </article>
+      <article class="card stat">
+        <p>Workouts</p>
+        <strong>19</strong>
+      </article>
+      <article class="card stat">
+        <p>Rank</p>
+        <strong>#12</strong>
+      </article>
+    </section>
+
+    <section class="two-col">
+      <article class="card goal">
+        <h3>Monthly Goal</h3>
+        <p>You are 72% toward your monthly target.</p>
+        <div class="progress"><span></span></div>
+      </article>
+      <article class="card security">
+        <h3>Security</h3>
+        <div class="list">
+          <div class="item-row"><span>2FA</span><strong>Enabled</strong></div>
+          <div class="item-row"><span>Device Lock</span><strong>On</strong></div>
+          <div class="item-row"><span>Recovery Email</span><strong>Verified</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="card prefs">
+      <h3>Preferences</h3>
+      <div class="switch-row"><span>Push Notifications</span><div class="switch on" aria-hidden="true"></div></div>
+      <div class="switch-row"><span>Weekly Report Email</span><div class="switch on" aria-hidden="true"></div></div>
+      <div class="switch-row"><span>Public Profile</span><div class="switch" aria-hidden="true"></div></div>
+    </section>
+
+    <section class="card achievements">
+      <h3>Recent Achievements</h3>
+      <div class="list">
+        <div class="item-row"><span>Consistency Master</span><strong>+120 XP</strong></div>
+        <div class="item-row"><span>Hydration Hero</span><strong>+80 XP</strong></div>
+        <div class="item-row"><span>Task Sprint</span><strong>+60 XP</strong></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <div class="nav-shell">
+    <a class="item" href="index.html"><span class="i">&#8962;</span>Home</a>
+    <a class="item" href="#"><span class="i">&#9639;</span>Stats</a>
+    <button class="fab" aria-label="Scan QR code">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 8V6a2 2 0 0 1 2-2h2" />
+        <path d="M20 8V6a2 2 0 0 0-2-2h-2" />
+        <path d="M4 16v2a2 2 0 0 0 2 2h2" />
+        <path d="M20 16v2a2 2 0 0 1-2 2h-2" />
+        <rect x="8" y="8" width="3" height="3" />
+        <rect x="13" y="8" width="3" height="3" />
+        <rect x="8" y="13" width="3" height="3" />
+        <path d="M13 13h1v1h1v2h-2z" />
+      </svg>
+    </button>
+    <a class="item" href="#"><span class="i">&#9719;</span>History</a>
+    <a class="item active" href="profile.html"><span class="i">&#9711;</span>Profile</a>
+  </div>
+</nav>
+</body>
+</html>

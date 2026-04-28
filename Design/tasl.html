@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task UI</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  padding: 16px;
+}
+
+/* Card */
+.card {
+  background: #1e293b;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+/* Button */
+.btn {
+  background: #3b82f6;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hidden */
+.hidden {
+  display: none;
+}
+
+/* List */
+.list div {
+  padding: 8px;
+  background: #334155;
+  border-radius: 8px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+/* Goal box */
+.goal-box div {
+  background: #334155;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Add Task -->
+  <div class="card">
+    <div class="header">
+      <h3>Add Task</h3>
+      <button class="btn" onclick="toggleCategories()">+</button>
+    </div>
+
+    <!-- Categories -->
+    <div id="categories" class="hidden list">
+      <div onclick="openWorkout()">Workout</div>
+      <div>Daily Habits</div>
+      <div>Diet / Food Diary</div>
+      <div>Custom</div>
+    </div>
+  </div>
+
+  <!-- Workout Section -->
+  <div id="workout" class="card hidden">
+    <h3>Workout</h3>
+    <div class="list">
+      <div onclick="openPush()">Push</div>
+      <div>Pull</div>
+      <div>Legs</div>
+    </div>
+  </div>
+
+  <!-- Push Exercises -->
+  <div id="push" class="card hidden">
+    <h3>Push</h3>
+    <div class="list">
+      <div>Bench Press ✔</div>
+      <div>Cable Fly</div>
+    </div>
+    <button class="btn small">Add more</button>
+  </div>
+
+  <!-- Daily Habits -->
+  <div class="card">
+    <h3>Daily Habits</h3>
+    <div class="list">
+      <div>💧 Water Intake</div>
+    </div>
+  </div>
+
+  <!-- Goals -->
+  <div class="card goal-box">
+    <h3>Goals</h3>
+    <div>Current Goal</div>
+    <div>Achievable</div>
+  </div>
+
+</div>
+
+<script>
+function toggleCategories() {
+  document.getElementById("categories").classList.toggle("hidden");
+}
+
+function openWorkout() {
+  document.getElementById("workout").classList.remove("hidden");
+}
+
+function openPush() {
+  document.getElementById("push").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
