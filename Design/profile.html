@@ -13,29 +13,23 @@
   --bg-1: #081224;
   --panel: #0d1526;
   --panel-soft: #131f36;
-  --line: #273550;
+  --line: #243252;
+  --line-soft: rgba(98, 120, 169, 0.22);
   --text: #ecf1ff;
-  --muted: #90a1c3;
+  --muted: #8e9bb6;
+  --muted-strong: #adc0df;
   --neon: #b8f84f;
-  --blue: #79bbff;
-  --radius: 22px;
+  --blue: #75b6ff;
+  --violet: #a772ff;
+  --orange: #ff9c64;
+  --radius: 24px;
+  --shadow: 0 14px 40px rgba(2, 7, 15, 0.52);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
 }
 
 html,
@@ -46,18 +40,32 @@ body {
 body {
   font-family: "Outfit", sans-serif;
   color: var(--text);
+  line-height: 1.3;
   background:
-    radial-gradient(circle at 10% -12%, #1d3b69 0%, rgba(29, 59, 105, 0) 42%),
-    radial-gradient(circle at 100% 22%, #103258 0%, rgba(16, 50, 88, 0) 36%),
-    linear-gradient(160deg, var(--bg-0), #060b17 62%, #041126 100%);
+    radial-gradient(circle at 10% -10%, #19345f 0%, rgba(25, 52, 95, 0) 40%),
+    radial-gradient(circle at 100% 18%, #0f2d4d 0%, rgba(15, 45, 77, 0) 34%),
+    linear-gradient(160deg, var(--bg-0), #050b17 58%, #031022 100%);
   display: flex;
   justify-content: center;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
 .app {
   width: 430px;
   min-height: 100dvh;
-  padding: 20px 16px 120px;
+  padding: 20px 18px 126px;
   position: relative;
   overflow: hidden;
 }
@@ -71,19 +79,19 @@ body {
 }
 
 .app::before {
-  width: 320px;
-  height: 320px;
-  left: -200px;
-  top: 120px;
-  background: radial-gradient(circle, rgba(184, 248, 79, 0.2), rgba(184, 248, 79, 0));
+  width: 360px;
+  height: 360px;
+  left: -220px;
+  top: 180px;
+  background: radial-gradient(circle, rgba(184, 248, 79, 0.18), rgba(184, 248, 79, 0));
 }
 
 .app::after {
-  width: 280px;
-  height: 280px;
+  width: 300px;
+  height: 300px;
   right: -190px;
-  bottom: 120px;
-  background: radial-gradient(circle, rgba(121, 187, 255, 0.2), rgba(121, 187, 255, 0));
+  top: 540px;
+  background: radial-gradient(circle, rgba(117, 182, 255, 0.18), rgba(117, 182, 255, 0));
 }
 
 .content {
@@ -91,80 +99,149 @@ body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  animation: reveal 420ms ease-out;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
 }
 
-.icon-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  border: 1px solid #304366;
-  background: linear-gradient(170deg, rgba(26, 37, 64, 0.9), rgba(13, 22, 41, 0.92));
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  color: #d8e2fa;
-}
-
-.page-title {
-  text-align: center;
-}
-
-.page-title h1 {
+  background: linear-gradient(145deg, #bcfd5a, #83cb2b);
+  color: #10170b;
   font-size: 22px;
-  letter-spacing: 0.2px;
+  font-weight: 800;
+  box-shadow: 0 10px 26px rgba(184, 248, 79, 0.25);
 }
 
-.page-title p {
-  font-size: 12px;
+.brand-copy p {
   color: var(--muted);
-  margin-top: 2px;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.brand-copy h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.bell {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid #31415f;
+  background: linear-gradient(170deg, rgba(26, 37, 64, 0.9), rgba(13, 22, 41, 0.9));
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  position: relative;
+}
+
+.bell::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon);
 }
 
 .card {
-  background: linear-gradient(160deg, rgba(15, 24, 42, 0.9), rgba(9, 16, 32, 0.95));
-  border: 1px solid rgba(98, 120, 169, 0.24);
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.88), rgba(9, 16, 32, 0.95));
+  border: 1px solid var(--line-soft);
   border-radius: var(--radius);
-  box-shadow: 0 12px 36px rgba(2, 7, 15, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-.profile-hero {
+.hero {
+  position: relative;
+  overflow: hidden;
   padding: 18px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(184, 248, 79, 0.16), transparent 34%),
+    radial-gradient(circle at 86% 26%, rgba(117, 182, 255, 0.16), transparent 28%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 74px 1fr;
+  grid-template-columns: 1fr auto;
   gap: 14px;
   align-items: center;
 }
 
-.avatar {
-  width: 74px;
-  height: 74px;
-  border-radius: 22px;
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  font-weight: 800;
-  color: #0f1808;
-  background: linear-gradient(145deg, #c4ff6c, #99de3a);
-  box-shadow: 0 16px 26px rgba(184, 248, 79, 0.28);
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
-.user h2 {
-  font-size: 20px;
+.profile-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #c4ff6c, #99de3a);
+  color: #10170b;
+  font-size: 28px;
+  font-weight: 800;
+  box-shadow: 0 14px 28px rgba(184, 248, 79, 0.24);
+}
+
+.identity h2 {
+  font-size: 24px;
   margin-bottom: 4px;
 }
 
-.user p {
-  font-size: 12px;
-  color: #9eb1d5;
-  margin-bottom: 8px;
+.identity p {
+  color: var(--muted-strong);
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .badges {
@@ -174,85 +251,190 @@ body {
 }
 
 .badge {
+  padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(120, 183, 255, 0.34);
-  background: rgba(120, 183, 255, 0.12);
-  color: #8ec8ff;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 4px 8px;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.stat {
-  padding: 14px 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(104, 128, 176, 0.2);
-  background: rgba(10, 18, 35, 0.68);
-}
-
-.stat p {
   font-size: 11px;
-  color: #98aac9;
-  margin-bottom: 6px;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(117, 182, 255, 0.1);
+  border: 1px solid rgba(117, 182, 255, 0.18);
 }
 
-.stat strong {
+.score-ring {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--neon) 0deg var(--progress-angle), #28344e var(--progress-angle) 360deg);
+}
+
+.score-ring-inner {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #10192d;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.score-ring-inner strong {
+  display: block;
   font-size: 22px;
 }
 
-.two-col {
+.score-ring-inner span {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.hero-copy {
+  color: var(--muted-strong);
+  font-size: 13px;
+  max-width: 260px;
+}
+
+.stats-row,
+.mini-grid,
+.dual-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-.goal,
-.prefs,
-.security,
-.achievements {
+.stats-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mini-grid,
+.dual-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.stat,
+.mini-card,
+.panel,
+.list-card {
   padding: 16px;
 }
 
-.goal h3,
-.prefs h3,
-.security h3,
-.achievements h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
+.stat,
+.mini-card {
+  border-radius: 20px;
+  background: rgba(10, 18, 34, 0.72);
+  border: 1px solid rgba(94, 119, 168, 0.18);
 }
 
-.goal p {
-  font-size: 12px;
-  color: #9caed0;
-  margin-bottom: 10px;
+.stat-label,
+.mini-card span,
+.section-head p,
+.list-item small {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.stat-value,
+.mini-card strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.stat-sub {
+  color: var(--muted-strong);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.section-head h3 {
+  font-size: 14px;
+  letter-spacing: 0.8px;
 }
 
 .progress {
   height: 8px;
-  border-radius: 99px;
-  background: #26344f;
+  border-radius: 999px;
+  background: #25344f;
   overflow: hidden;
+  margin-top: 12px;
 }
 
 .progress > span {
   display: block;
   height: 100%;
-  width: 72%;
-  background: linear-gradient(90deg, #b8f84f, #95d439);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #bcfd5a, #95d439);
+}
+
+.panel h3,
+.list-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.panel p {
+  color: var(--muted-strong);
+  font-size: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-item {
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(104, 128, 176, 0.18);
+  background: rgba(10, 18, 35, 0.58);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.list-item strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.value-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.value-pill.good {
+  color: var(--neon);
+  background: rgba(184, 248, 79, 0.1);
+}
+
+.value-pill.blue {
+  color: var(--blue);
+  background: rgba(117, 182, 255, 0.1);
 }
 
 .switch-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(90, 114, 154, 0.25);
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(90, 114, 154, 0.22);
 }
 
 .switch-row:last-child {
@@ -261,27 +443,28 @@ body {
 }
 
 .switch-row span {
-  font-size: 12px;
-  color: #a8b8d5;
+  color: var(--muted-strong);
+  font-size: 13px;
 }
 
 .switch {
-  width: 42px;
+  width: 44px;
   height: 24px;
   border-radius: 999px;
   border: 1px solid #35507f;
   background: #0f203f;
   position: relative;
+  flex: 0 0 auto;
 }
 
 .switch::after {
   content: "";
   position: absolute;
+  top: 3px;
+  left: 3px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  top: 3px;
-  left: 3px;
   background: #9ab0d8;
 }
 
@@ -292,33 +475,7 @@ body {
 
 .switch.on::after {
   left: 21px;
-  background: #b8f84f;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.item-row {
-  padding: 11px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(104, 128, 176, 0.22);
-  background: rgba(10, 18, 35, 0.58);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item-row span {
-  font-size: 12px;
-  color: #a6b7d6;
-}
-
-.item-row strong {
-  font-size: 12px;
-  color: #dfe8fb;
+  background: var(--neon);
 }
 
 .bottom-nav {
@@ -329,7 +486,7 @@ body {
   width: 430px;
   background: linear-gradient(180deg, rgba(6, 10, 20, 0), rgba(4, 8, 15, 0.98) 26%, rgba(4, 8, 15, 1) 100%);
   padding: 8px 16px calc(14px + env(safe-area-inset-bottom));
-  z-index: 5;
+  z-index: 6;
 }
 
 .nav-shell {
@@ -359,8 +516,6 @@ body {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  border: none;
-  color: #081108;
   margin: 0 auto;
   background: linear-gradient(145deg, #c4ff6c, #98df3b);
   box-shadow: 0 16px 26px rgba(184, 248, 79, 0.35);
@@ -388,19 +543,19 @@ body {
 }
 
 @media (max-width: 390px) {
-  .profile-hero {
-    grid-template-columns: 66px 1fr;
-    gap: 12px;
-  }
-
-  .avatar {
-    width: 66px;
-    height: 66px;
-    font-size: 24px;
-  }
-
-  .two-col {
+  .hero-grid,
+  .stats-row,
+  .mini-grid,
+  .dual-grid {
     grid-template-columns: 1fr;
+  }
+
+  .profile-main {
+    align-items: flex-start;
+  }
+
+  .identity h2 {
+    font-size: 22px;
   }
 }
 </style>
@@ -409,95 +564,414 @@ body {
 <main class="app">
   <div class="content">
     <header class="topbar">
-      <a class="icon-btn" href="index.html" aria-label="Go to home">&#8592;</a>
-      <div class="page-title">
-        <h1>Profile Dashboard</h1>
-        <p>Account and preferences</p>
+      <div class="brand">
+        <div class="logo">F</div>
+        <div class="brand-copy">
+          <p>FitCore account</p>
+          <h1>Profile center</h1>
+        </div>
       </div>
-      <button class="icon-btn" aria-label="Settings">&#9881;</button>
+      <button class="bell" aria-label="Notifications">!</button>
     </header>
 
-    <section class="card profile-hero">
-      <div class="avatar">AK</div>
-      <div class="user">
-        <h2>Alex Kim</h2>
-        <p>Premium Member</p>
-        <div class="badges">
-          <span class="badge">Level 7</span>
-          <span class="badge">28 day streak</span>
-          <span class="badge">4,120 tasks done</span>
+    <article class="card hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">MEMBER PROFILE</div>
+          <div class="profile-main">
+            <div class="avatar">AK</div>
+            <div class="identity">
+              <h2>Alex Kim</h2>
+              <p>Premium member focused on consistency, recovery, and steady weekly wins.</p>
+              <div class="badges">
+                <span class="badge" id="levelBadge">Level 7</span>
+                <span class="badge" id="streakBadge">0 day streak</span>
+                <span class="badge" id="doneBadge">0 tasks done</span>
+              </div>
+            </div>
+          </div>
+          <p class="hero-copy" id="heroCopy">Your recent task activity will show up here and keep the profile page in sync with the rest of the app.</p>
+        </div>
+        <div class="score-ring" id="scoreRing">
+          <div class="score-ring-inner">
+            <strong id="scoreValue">0%</strong>
+            <span>SCORE</span>
+          </div>
         </div>
       </div>
+    </article>
+
+    <section class="stats-row">
+      <article class="card stat">
+        <div class="stat-label">TASKS DONE</div>
+        <div class="stat-value" id="doneValue">0</div>
+        <div class="stat-sub">all tracked completions</div>
+      </article>
+      <article class="card stat">
+        <div class="stat-label">TOP AREA</div>
+        <div class="stat-value" id="topValue">-</div>
+        <div class="stat-sub" id="topSub">best performing category</div>
+      </article>
+      <article class="card stat">
+        <div class="stat-label">FOCUS DAYS</div>
+        <div class="stat-value" id="focusValue">0</div>
+        <div class="stat-sub">scheduled in the next 3 days</div>
+      </article>
     </section>
 
-    <section class="stats">
-      <article class="card stat">
-        <p>Weekly Tasks</p>
-        <strong>82</strong>
+    <section class="mini-grid">
+      <article class="card mini-card">
+        <span>MONTHLY GOAL</span>
+        <strong id="goalValue">0%</strong>
+        <div class="progress"><span id="goalBar" style="width: 0%;"></span></div>
       </article>
-      <article class="card stat">
-        <p>Workouts</p>
-        <strong>19</strong>
-      </article>
-      <article class="card stat">
-        <p>Rank</p>
-        <strong>#12</strong>
+      <article class="card mini-card">
+        <span>ACTIVE CATEGORIES</span>
+        <strong id="categoryValue">0</strong>
+        <div class="stat-sub">areas with planned tasks</div>
       </article>
     </section>
 
-    <section class="two-col">
-      <article class="card goal">
-        <h3>Monthly Goal</h3>
-        <p>You are 72% toward your monthly target.</p>
-        <div class="progress"><span></span></div>
+    <section class="dual-grid">
+      <article class="card panel">
+        <div class="section-head">
+          <h3>Routine Snapshot</h3>
+          <p>Live from task flow</p>
+        </div>
+        <div class="list" id="routineList"></div>
       </article>
-      <article class="card security">
-        <h3>Security</h3>
+
+      <article class="card panel">
+        <div class="section-head">
+          <h3>Security</h3>
+          <p>Account status</p>
+        </div>
         <div class="list">
-          <div class="item-row"><span>2FA</span><strong>Enabled</strong></div>
-          <div class="item-row"><span>Device Lock</span><strong>On</strong></div>
-          <div class="item-row"><span>Recovery Email</span><strong>Verified</strong></div>
+          <div class="list-item">
+            <div>
+              <strong>Two-factor auth</strong>
+              <small>Extra sign-in protection enabled</small>
+            </div>
+            <span class="value-pill good">ON</span>
+          </div>
+          <div class="list-item">
+            <div>
+              <strong>Recovery email</strong>
+              <small>Backup access is verified</small>
+            </div>
+            <span class="value-pill blue">READY</span>
+          </div>
+          <div class="list-item">
+            <div>
+              <strong>Device lock</strong>
+              <small>Trusted device protection active</small>
+            </div>
+            <span class="value-pill good">SAFE</span>
+          </div>
         </div>
       </article>
     </section>
 
-    <section class="card prefs">
+    <section class="card list-card">
       <h3>Preferences</h3>
-      <div class="switch-row"><span>Push Notifications</span><div class="switch on" aria-hidden="true"></div></div>
-      <div class="switch-row"><span>Weekly Report Email</span><div class="switch on" aria-hidden="true"></div></div>
-      <div class="switch-row"><span>Public Profile</span><div class="switch" aria-hidden="true"></div></div>
+      <div class="switch-row"><span>Push notifications</span><div class="switch on" aria-hidden="true"></div></div>
+      <div class="switch-row"><span>Weekly progress email</span><div class="switch on" aria-hidden="true"></div></div>
+      <div class="switch-row"><span>Visible public profile</span><div class="switch" aria-hidden="true"></div></div>
     </section>
 
-    <section class="card achievements">
-      <h3>Recent Achievements</h3>
-      <div class="list">
-        <div class="item-row"><span>Consistency Master</span><strong>+120 XP</strong></div>
-        <div class="item-row"><span>Hydration Hero</span><strong>+80 XP</strong></div>
-        <div class="item-row"><span>Task Sprint</span><strong>+60 XP</strong></div>
+    <section class="card list-card">
+      <div class="section-head">
+        <h3>Recent Achievements</h3>
+        <p>Momentum rewards</p>
       </div>
+      <div class="list" id="achievementList"></div>
     </section>
   </div>
 </main>
 
 <nav class="bottom-nav" aria-label="Bottom navigation">
   <div class="nav-shell">
-    <a class="item" href="index.html"><span class="i">&#8962;</span>Home</a>
-    <a class="item" href="#"><span class="i">&#9639;</span>Stats</a>
+    <a class="item" href="index.html"><span class="i">H</span>Home</a>
+    <a class="item" href="progress.html"><span class="i">P</span>Progress</a>
     <button class="fab" aria-label="Scan QR code">
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 8V6a2 2 0 0 1 2-2h2" />
-        <path d="M20 8V6a2 2 0 0 0-2-2h-2" />
-        <path d="M4 16v2a2 2 0 0 0 2 2h2" />
-        <path d="M20 16v2a2 2 0 0 1-2 2h-2" />
-        <rect x="8" y="8" width="3" height="3" />
-        <rect x="13" y="8" width="3" height="3" />
-        <rect x="8" y="13" width="3" height="3" />
-        <path d="M13 13h1v1h1v2h-2z" />
+        <path d="M4 8V6a2 2 0 0 1 2-2h2"></path>
+        <path d="M20 8V6a2 2 0 0 0-2-2h-2"></path>
+        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+        <path d="M20 16v2a2 2 0 0 1-2 2h-2"></path>
+        <rect x="8" y="8" width="3" height="3"></rect>
+        <rect x="13" y="8" width="3" height="3"></rect>
+        <rect x="8" y="13" width="3" height="3"></rect>
+        <path d="M13 13h1v1h1v2h-2z"></path>
       </svg>
     </button>
-    <a class="item" href="#"><span class="i">&#9719;</span>History</a>
-    <a class="item active" href="profile.html"><span class="i">&#9711;</span>Profile</a>
+    <a class="item" href="task.html"><span class="i">T</span>Tasks</a>
+    <a class="item active" href="profile.html"><span class="i">U</span>Profile</a>
   </div>
 </nav>
+
+<script>
+const storageKey = "fitcore-task-state-v2";
+
+const fallbackData = {
+  workout: {
+    title: "Workout",
+    short: "WO",
+    accentClass: "workout",
+    tabs: {
+      Push: [
+        { id: "workout-Push-0", title: "Bench Press", date: "2026-04-29" },
+        { id: "workout-Push-1", title: "Shoulder Press", date: "2026-04-29" }
+      ],
+      Pull: [
+        { id: "workout-Pull-0", title: "Pull-up", date: "2026-04-30" }
+      ],
+      Legs: [
+        { id: "workout-Legs-0", title: "Squat", date: "2026-05-01" }
+      ]
+    }
+  },
+  habit: {
+    title: "Habits",
+    short: "HB",
+    accentClass: "habit",
+    tasks: [
+      { id: "habit-0", title: "Drink Water", date: "2026-04-29" },
+      { id: "habit-1", title: "Meditate", date: "2026-04-30" }
+    ]
+  },
+  diet: {
+    title: "Diet",
+    short: "DT",
+    accentClass: "diet",
+    tasks: [
+      { id: "diet-0", title: "Breakfast", date: "2026-04-29" },
+      { id: "diet-1", title: "Dinner", date: "2026-04-30" }
+    ]
+  },
+  custom: {
+    title: "Custom",
+    short: "CU",
+    accentClass: "custom",
+    tasks: [
+      { id: "custom-0", title: "Plan tomorrow", date: "2026-04-30" }
+    ]
+  }
+};
+
+function loadState() {
+  const fallback = {
+    data: fallbackData,
+    completed: {}
+  };
+
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(saved);
+    return {
+      data: parsed.data || fallback.data,
+      completed: parsed.completed || {}
+    };
+  } catch (error) {
+    return fallback;
+  }
+}
+
+const state = loadState();
+
+function normalizeTask(item, legacyId) {
+  if (item && typeof item === "object") {
+    return {
+      id: item.id || legacyId,
+      title: item.title || item.name || "Task",
+      date: item.date || item.day || ""
+    };
+  }
+
+  return {
+    id: legacyId,
+    title: String(item || "Task"),
+    date: ""
+  };
+}
+
+function getCategoryTasks(key) {
+  const category = state.data[key];
+  if (!category) {
+    return [];
+  }
+
+  if (category.tabs) {
+    return Object.entries(category.tabs).reduce(function (allItems, entry) {
+      const tabName = entry[0];
+      const items = entry[1];
+      return allItems.concat(items.map(function (item, index) {
+        return normalizeTask(item, key + "-" + tabName + "-" + index);
+      }));
+    }, []);
+  }
+
+  return (category.tasks || []).map(function (item, index) {
+    return normalizeTask(item, key + "-" + index);
+  });
+}
+
+function getCategoryStats(key) {
+  const tasks = getCategoryTasks(key);
+  let done = 0;
+
+  tasks.forEach(function (task, index) {
+    const legacyKey = key + "-" + index;
+    if (state.completed[task.id] || state.completed[legacyKey] || task.completed === true) {
+      done += 1;
+    }
+  });
+
+  return {
+    total: tasks.length,
+    done: done,
+    percent: tasks.length ? Math.round((done / tasks.length) * 100) : 0,
+    tasks: tasks
+  };
+}
+
+function getAllStats() {
+  const categories = Object.keys(state.data).map(function (key) {
+    const base = state.data[key];
+    const stats = getCategoryStats(key);
+    return {
+      key: key,
+      title: base.title,
+      short: base.short,
+      total: stats.total,
+      done: stats.done,
+      percent: stats.percent,
+      tasks: stats.tasks
+    };
+  });
+
+  const total = categories.reduce(function (sum, item) {
+    return sum + item.total;
+  }, 0);
+
+  const done = categories.reduce(function (sum, item) {
+    return sum + item.done;
+  }, 0);
+
+  const score = total ? Math.round((done / total) * 100) : 0;
+  const topCategory = categories.slice().sort(function (a, b) {
+    return b.percent - a.percent;
+  })[0];
+
+  const uniqueDates = new Set();
+  categories.forEach(function (category) {
+    category.tasks.forEach(function (task) {
+      if (task.date) {
+        uniqueDates.add(task.date);
+      }
+    });
+  });
+
+  const monthlyGoal = Math.min(100, Math.round((done / Math.max(24, total || 1)) * 100));
+
+  return {
+    categories: categories,
+    total: total,
+    done: done,
+    score: score,
+    topCategory: topCategory,
+    focusDays: uniqueDates.size,
+    activeCategories: categories.filter(function (item) {
+      return item.total > 0;
+    }).length,
+    monthlyGoal: monthlyGoal,
+    streak: Math.max(4, Math.min(31, done + 3))
+  };
+}
+
+function renderRoutine(stats) {
+  const routineList = document.getElementById("routineList");
+  routineList.innerHTML = "";
+
+  stats.categories.forEach(function (category) {
+    const item = document.createElement("div");
+    item.className = "list-item";
+    item.innerHTML = `
+      <div>
+        <strong>${category.title}</strong>
+        <small>${category.done} of ${category.total} completed</small>
+      </div>
+      <span class="value-pill ${category.percent >= 70 ? "good" : "blue"}">${category.percent}%</span>
+    `;
+    routineList.appendChild(item);
+  });
+}
+
+function renderAchievements(stats) {
+  const achievements = [
+    {
+      title: "Consistency Master",
+      detail: stats.score >= 70 ? "Your completion score is holding strong." : "Keep building daily momentum.",
+      value: "+" + Math.max(60, stats.done * 10) + " XP"
+    },
+    {
+      title: "Focus Builder",
+      detail: stats.focusDays + " planned day slots are already mapped out.",
+      value: "+" + Math.max(40, stats.focusDays * 20) + " XP"
+    },
+    {
+      title: "Category Leader",
+      detail: stats.topCategory ? stats.topCategory.title + " is your strongest lane right now." : "Your strongest category will show here.",
+      value: stats.topCategory ? stats.topCategory.percent + "%" : "--"
+    }
+  ];
+
+  const list = document.getElementById("achievementList");
+  list.innerHTML = "";
+
+  achievements.forEach(function (achievement, index) {
+    const item = document.createElement("div");
+    item.className = "list-item";
+    item.innerHTML = `
+      <div>
+        <strong>${achievement.title}</strong>
+        <small>${achievement.detail}</small>
+      </div>
+      <span class="value-pill ${index === 0 ? "good" : "blue"}">${achievement.value}</span>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function renderProfile() {
+  const stats = getAllStats();
+
+  document.getElementById("scoreValue").textContent = stats.score + "%";
+  document.getElementById("scoreRing").style.setProperty("--progress-angle", stats.score * 3.6 + "deg");
+  document.getElementById("doneValue").textContent = stats.done;
+  document.getElementById("topValue").textContent = stats.topCategory ? stats.topCategory.short : "-";
+  document.getElementById("topSub").textContent = stats.topCategory
+    ? stats.topCategory.title + " leads at " + stats.topCategory.percent + "%"
+    : "best performing category";
+  document.getElementById("focusValue").textContent = stats.focusDays;
+  document.getElementById("goalValue").textContent = stats.monthlyGoal + "%";
+  document.getElementById("goalBar").style.width = stats.monthlyGoal + "%";
+  document.getElementById("categoryValue").textContent = stats.activeCategories;
+  document.getElementById("streakBadge").textContent = stats.streak + " day streak";
+  document.getElementById("doneBadge").textContent = stats.done + " tasks done";
+  document.getElementById("heroCopy").textContent = stats.topCategory
+    ? stats.topCategory.title + " is leading your profile right now, and your account view now matches the rest of the app."
+    : "Your recent task activity will show up here and keep the profile page in sync with the rest of the app.";
+
+  renderRoutine(stats);
+  renderAchievements(stats);
+}
+
+renderProfile();
+</script>
 </body>
 </html>
