@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitCore Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #050812;
+  --bg-1: #081224;
+  --panel: #0d1526;
+  --panel-soft: #131f36;
+  --line: #243252;
+  --line-soft: rgba(98, 120, 169, 0.22);
+  --text: #ecf1ff;
+  --muted: #8e9bb6;
+  --muted-strong: #adc0df;
+  --neon: #b8f84f;
+  --blue: #75b6ff;
+  --violet: #a772ff;
+  --orange: #ff9c64;
+  --radius: 24px;
+  --shadow: 0 14px 40px rgba(2, 7, 15, 0.52);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  color: var(--text);
+  line-height: 1.3;
+  background:
+    radial-gradient(circle at 10% -10%, #19345f 0%, rgba(25, 52, 95, 0) 40%),
+    radial-gradient(circle at 100% 18%, #0f2d4d 0%, rgba(15, 45, 77, 0) 34%),
+    linear-gradient(160deg, var(--bg-0), #050b17 58%, #031022 100%);
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.app {
+  width: 430px;
+  min-height: 100dvh;
+  padding: 20px 18px 126px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app::before {
+  width: 360px;
+  height: 360px;
+  left: -220px;
+  top: 220px;
+  background: radial-gradient(circle, rgba(184, 248, 79, 0.16), rgba(184, 248, 79, 0));
+}
+
+.app::after {
+  width: 300px;
+  height: 300px;
+  right: -190px;
+  top: 540px;
+  background: radial-gradient(circle, rgba(117, 182, 255, 0.18), rgba(117, 182, 255, 0));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: reveal 420ms ease-out;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #bcfd5a, #83cb2b);
+  color: #10170b;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 10px 26px rgba(184, 248, 79, 0.25);
+}
+
+.brand-copy p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.brand-copy h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.bell {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid #31415f;
+  background: linear-gradient(170deg, rgba(26, 37, 64, 0.9), rgba(13, 22, 41, 0.9));
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  position: relative;
+}
+
+.bell::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon);
+}
+
+.card {
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.88), rgba(9, 16, 32, 0.95));
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(184, 248, 79, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 30%, rgba(117, 182, 255, 0.18), transparent 26%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.hero h2 {
+  font-size: 25px;
+  line-height: 1.08;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: var(--muted-strong);
+  font-size: 13px;
+  max-width: 238px;
+}
+
+.ring {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--neon) 0deg var(--progress-angle), #28344e var(--progress-angle) 360deg);
+}
+
+.ring-inner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #10192d;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.ring-inner strong {
+  display: block;
+  font-size: 21px;
+}
+
+.ring-inner span {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.range-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #2b3a59;
+  border-radius: 999px;
+  background: #101c35;
+}
+
+.range-btn {
+  padding: 6px 11px;
+  border-radius: 999px;
+  color: #94a5c8;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.range-btn.active {
+  background: var(--neon);
+  color: #0f1808;
+}
+
+.section-head p {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.section-head h3 {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}
+
+.breakdown {
+  padding: 16px;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.breakdown-item {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(8, 15, 29, 0.72);
+  border: 1px solid rgba(102, 123, 166, 0.18);
+}
+
+.breakdown-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.breakdown-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chip {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #081108;
+}
+
+.chip.workout {
+  background: linear-gradient(145deg, #c6ff6f, #88d33a);
+}
+
+.chip.habit {
+  background: linear-gradient(145deg, #8bc0ff, #5d86ff);
+}
+
+.chip.diet {
+  background: linear-gradient(145deg, #ffb37c, #ff7b66);
+}
+
+.chip.custom {
+  background: linear-gradient(145deg, #c7adff, #8a67ff);
+}
+
+.breakdown-copy h4 {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.breakdown-copy p,
+.breakdown-meta {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #25344f;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #bcfd5a, #95d439);
+}
+
+.chart-card {
+  padding: 16px;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: end;
+  gap: 8px;
+  height: 166px;
+  margin-top: 18px;
+}
+
+.bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-shell {
+  width: 100%;
+  height: 130px;
+  border-radius: 14px;
+  background: rgba(9, 18, 35, 0.78);
+  border: 1px solid rgba(99, 122, 168, 0.18);
+  display: flex;
+  align-items: flex-end;
+  padding: 6px;
+}
+
+.bar-level {
+  width: 100%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #d4ff7b 0%, #90d438 100%);
+  box-shadow: 0 10px 22px rgba(184, 248, 79, 0.18);
+}
+
+.bar-col span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.bar-col strong {
+  font-size: 10px;
+  color: var(--muted-strong);
+}
+
+.legend {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.legend .tasks {
+  background: var(--neon);
+}
+
+.legend .goal {
+  background: var(--blue);
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 430px;
+  background: linear-gradient(180deg, rgba(6, 10, 20, 0), rgba(4, 8, 15, 0.98) 26%, rgba(4, 8, 15, 1) 100%);
+  padding: 8px 16px calc(14px + env(safe-area-inset-bottom));
+  z-index: 6;
+}
+
+.nav-shell {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 4px;
+}
+
+.item {
+  text-align: center;
+  color: #6f7ea0;
+  font-size: 12px;
+}
+
+.item .i {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.item.active {
+  color: var(--neon);
+}
+
+.fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #c4ff6c, #98df3b);
+  box-shadow: 0 16px 26px rgba(184, 248, 79, 0.35);
+}
+
+.fab svg {
+  width: 24px;
+  height: 24px;
+  stroke: #081108;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 430px) {
+  .app,
+  .bottom-nav {
+    width: 100%;
+  }
+
+  .app {
+    padding: 18px 14px 118px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+  }
+
+  .bars {
+    gap: 6px;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="content">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">F</div>
+        <div class="brand-copy">
+          <p>FitCore analytics</p>
+          <h1>Progress center</h1>
+        </div>
+      </div>
+      <button class="bell" aria-label="Notifications">!</button>
+    </header>
+
+    <article class="card hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">CONSISTENCY SCORE</div>
+          <h2 id="heroTitle">Progress that actually reflects your task board.</h2>
+          <p id="heroCopy">Your latest completions from the task page feed this dashboard automatically.</p>
+          <div class="range-switch" style="margin-top: 14px;">
+            <button class="range-btn active" type="button" data-range="weekly">Weekly</button>
+            <button class="range-btn" type="button" data-range="monthly">Monthly</button>
+            <button class="range-btn" type="button" data-range="yearly">Yearly</button>
+          </div>
+        </div>
+        <div class="ring" id="heroRing">
+          <div class="ring-inner">
+            <strong id="heroPercent">0%</strong>
+            <span>DONE</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="section-head">
+      <h3>CATEGORY BREAKDOWN</h3>
+      <p id="categoryNote">Live sync from your task page</p>
+    </div>
+
+    <section class="card breakdown">
+      <div class="breakdown-list" id="breakdownList"></div>
+    </section>
+
+    <section class="card chart-card">
+      <div class="section-head">
+        <h3>WEEKLY TREND</h3>
+        <p id="trendSummary">Task load across the week</p>
+      </div>
+      <div class="bars" id="bars"></div>
+      <div class="legend">
+        <span><i class="tasks"></i>Completed tasks</span>
+        <span><i class="goal"></i>Relative goal pacing</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <div class="nav-shell">
+    <a class="item" href="index.html"><span class="i">H</span>Home</a>
+    <a class="item active" href="progress.html"><span class="i">P</span>Progress</a>
+    <button class="fab" aria-label="Scan QR code">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 8V6a2 2 0 0 1 2-2h2"></path>
+        <path d="M20 8V6a2 2 0 0 0-2-2h-2"></path>
+        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+        <path d="M20 16v2a2 2 0 0 1-2 2h-2"></path>
+        <rect x="8" y="8" width="3" height="3"></rect>
+        <rect x="13" y="8" width="3" height="3"></rect>
+        <rect x="8" y="13" width="3" height="3"></rect>
+        <path d="M13 13h1v1h1v2h-2z"></path>
+      </svg>
+    </button>
+    <a class="item" href="task.html"><span class="i">T</span>Tasks</a>
+    <a class="item" href="profile.html"><span class="i">U</span>Profile</a>
+  </div>
+</nav>
+
+<script>
+const storageKey = "fitcore-task-state-v2";
+
+const fallbackData = {
+  workout: {
+    title: "Workout",
+    short: "WO",
+    accentClass: "workout",
+    tabs: {
+      Push: ["Bench Press", "Shoulder Press", "Tricep Dip", "Chest Fly", "Push-up"],
+      Pull: ["Pull-up", "Deadlift", "Barbell Row", "Face Pull", "Bicep Curl"],
+      Legs: ["Squat", "Lunges", "Leg Press", "Calf Raise", "Leg Curl"]
+    }
+  },
+  habit: {
+    title: "Habits",
+    short: "HB",
+    accentClass: "habit",
+    tasks: ["Drink Water", "Meditate", "Read", "Sleep 8h", "Stretch"]
+  },
+  diet: {
+    title: "Diet",
+    short: "DT",
+    accentClass: "diet",
+    tasks: ["Breakfast", "Lunch", "Dinner", "Snacks", "Protein Intake"]
+  },
+  custom: {
+    title: "Custom",
+    short: "CU",
+    accentClass: "custom",
+    tasks: ["Prepare gym bag", "Plan tomorrow", "Check weekly goals"]
+  }
+};
+
+const taskRangeData = {
+  weekly: { label: "this week", multiplier: 1 },
+  monthly: { label: "this month", multiplier: 4 },
+  yearly: { label: "this year", multiplier: 48 }
+};
+
+let currentRange = "weekly";
+const rangeButtons = document.querySelectorAll(".range-btn");
+
+function loadState() {
+  const fallback = {
+    data: JSON.parse(JSON.stringify(fallbackData)),
+    completed: {}
+  };
+
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(saved);
+    return {
+      data: parsed.data || fallback.data,
+      completed: parsed.completed || {}
+    };
+  } catch (error) {
+    return fallback;
+  }
+}
+
+const state = loadState();
+
+function getCategoryStats(key) {
+  const category = state.data[key];
+  if (!category) {
+    return { total: 0, done: 0 };
+  }
+
+  if (category.tabs) {
+    let total = 0;
+    let done = 0;
+
+    Object.entries(category.tabs).forEach(([tabName, items]) => {
+      total += items.length;
+      items.forEach(function (item, index) {
+        if (state.completed["workout-" + tabName + "-" + index]) {
+          done += 1;
+        }
+      });
+    });
+
+    return { total, done };
+  }
+
+  const items = category.tasks || [];
+  let done = 0;
+
+  items.forEach(function (item, index) {
+    if (state.completed[key + "-" + index]) {
+      done += 1;
+    }
+  });
+
+  return { total: items.length, done };
+}
+
+function getAllStats() {
+  const categories = Object.keys(state.data).map(function (key) {
+    const base = state.data[key];
+    const stats = getCategoryStats(key);
+    const percent = stats.total ? Math.round((stats.done / stats.total) * 100) : 0;
+    return {
+      key,
+      title: base.title,
+      short: base.short,
+      accentClass: base.accentClass,
+      total: stats.total,
+      done: stats.done,
+      percent
+    };
+  });
+
+  const total = categories.reduce(function (sum, item) {
+    return sum + item.total;
+  }, 0);
+
+  const done = categories.reduce(function (sum, item) {
+    return sum + item.done;
+  }, 0);
+
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  const topCategory = categories.slice().sort(function (a, b) {
+    return b.percent - a.percent;
+  })[0];
+
+  return {
+    categories,
+    total,
+    done,
+    percent,
+    topCategory
+  };
+}
+
+function getRangeMetrics(stats) {
+  const config = taskRangeData[currentRange];
+  const scaledDone = stats.done * config.multiplier;
+  const scaledTotal = stats.total * config.multiplier;
+  const percent = scaledTotal ? Math.round((scaledDone / scaledTotal) * 100) : 0;
+
+  return {
+    label: config.label,
+    done: scaledDone,
+    total: scaledTotal,
+    percent
+  };
+}
+
+function renderHero(stats) {
+  const range = getRangeMetrics(stats);
+  document.getElementById("heroPercent").textContent = range.percent + "%";
+  document.getElementById("heroRing").style.setProperty("--progress-angle", range.percent * 3.6 + "deg");
+  document.getElementById("heroTitle").textContent = range.done + " of " + range.total + " tasks completed " + range.label + ".";
+  document.getElementById("heroCopy").textContent = stats.topCategory
+    ? stats.topCategory.title + " is leading right now at " + stats.topCategory.percent + "% completion."
+    : "Your " + currentRange + " view is based on the live task board.";
+}
+
+function renderBreakdown(stats) {
+  const list = document.getElementById("breakdownList");
+  list.innerHTML = "";
+
+  stats.categories.forEach(function (item) {
+    const node = document.createElement("article");
+    node.className = "breakdown-item";
+    node.innerHTML = `
+      <div class="breakdown-top">
+        <div class="breakdown-left">
+          <div class="chip ${item.accentClass}">${item.short}</div>
+          <div class="breakdown-copy">
+            <h4>${item.title}</h4>
+            <p>${item.done} complete out of ${item.total}</p>
+          </div>
+        </div>
+        <div class="breakdown-meta">${item.percent}%</div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: ${item.percent}%;"></div>
+      </div>
+    `;
+    list.appendChild(node);
+  });
+}
+
+function renderBars(stats) {
+  const bars = document.getElementById("bars");
+  const range = getRangeMetrics(stats);
+  const base = [42, 55, 48, 64, 72, 80, 68];
+  const scale = Math.max(range.percent, 10) / 100;
+  const values = base.map(function (value, index) {
+    return Math.max(10, Math.min(100, Math.round(value * scale + index * 2)));
+  });
+  const labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  bars.innerHTML = "";
+
+  values.forEach(function (value, index) {
+    const col = document.createElement("div");
+    col.className = "bar-col";
+    col.innerHTML = `
+      <strong>${Math.round((value / 100) * range.done)}</strong>
+      <div class="bar-shell">
+        <div class="bar-level" style="height: ${value}%;"></div>
+      </div>
+      <span>${labels[index]}</span>
+    `;
+    bars.appendChild(col);
+  });
+
+  document.getElementById("trendSummary").textContent = range.done + " task completions mapped into your " + currentRange + " rhythm.";
+}
+
+function render() {
+  const stats = getAllStats();
+  renderHero(stats);
+  renderBreakdown(stats);
+  renderBars(stats);
+}
+
+rangeButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    currentRange = button.dataset.range;
+    rangeButtons.forEach(function (btn) {
+      btn.classList.toggle("active", btn === button);
+    });
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
