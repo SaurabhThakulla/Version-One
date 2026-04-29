@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitCore Tasks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #050812;
+  --bg-1: #081224;
+  --panel: #0d1526;
+  --panel-soft: #131f36;
+  --line: #243252;
+  --line-soft: rgba(98, 120, 169, 0.22);
+  --text: #ecf1ff;
+  --muted: #8e9bb6;
+  --muted-strong: #adc0df;
+  --neon: #b8f84f;
+  --blue: #75b6ff;
+  --violet: #a772ff;
+  --danger: #ff7b7b;
+  --radius: 24px;
+  --shadow: 0 14px 40px rgba(2, 7, 15, 0.52);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  color: var(--text);
+  line-height: 1.3;
+  background:
+    radial-gradient(circle at 10% -10%, #19345f 0%, rgba(25, 52, 95, 0) 40%),
+    radial-gradient(circle at 100% 18%, #0f2d4d 0%, rgba(15, 45, 77, 0) 34%),
+    linear-gradient(160deg, var(--bg-0), #050b17 58%, #031022 100%);
+  display: flex;
+  justify-content: center;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+input {
+  border: 0;
+  outline: none;
+  color: var(--text);
+  background: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app {
+  width: 430px;
+  min-height: 100dvh;
+  padding: 20px 18px 126px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app::before {
+  width: 360px;
+  height: 360px;
+  left: -220px;
+  top: 280px;
+  background: radial-gradient(circle, rgba(184, 248, 79, 0.16), rgba(184, 248, 79, 0));
+}
+
+.app::after {
+  width: 300px;
+  height: 300px;
+  right: -190px;
+  top: 560px;
+  background: radial-gradient(circle, rgba(117, 182, 255, 0.18), rgba(117, 182, 255, 0));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: reveal 420ms ease-out;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #bcfd5a, #83cb2b);
+  color: #10170b;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 10px 26px rgba(184, 248, 79, 0.25);
+}
+
+.brand-copy p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.brand-copy h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.bell {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid #31415f;
+  background: linear-gradient(170deg, rgba(26, 37, 64, 0.9), rgba(13, 22, 41, 0.9));
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  position: relative;
+}
+
+.bell::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon);
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.card {
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.88), rgba(9, 16, 32, 0.95));
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(184, 248, 79, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 30%, rgba(117, 182, 255, 0.18), transparent 26%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.hero h2 {
+  font-size: 24px;
+  line-height: 1.08;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: var(--muted-strong);
+  font-size: 13px;
+  max-width: 230px;
+}
+
+.ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--neon) 0deg var(--progress-angle), #28344e var(--progress-angle) 360deg);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.ring-inner {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #10192d;
+  text-align: center;
+}
+
+.ring-inner strong {
+  display: block;
+  font-size: 20px;
+}
+
+.ring-inner span {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(10, 18, 34, 0.72);
+  border: 1px solid rgba(94, 119, 168, 0.18);
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-sub {
+  color: var(--muted-strong);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.composer {
+  padding: 16px;
+}
+
+.composer-copy h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.composer-copy p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.input-shell {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 10px 14px;
+  border-radius: 18px;
+  background: rgba(7, 14, 26, 0.78);
+  border: 1px solid rgba(100, 122, 168, 0.22);
+}
+
+.input-shell input {
+  flex: 1;
+  font-size: 14px;
+}
+
+.input-shell input::placeholder {
+  color: #7383a6;
+}
+
+.add-btn {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #c4ff6c, #98df3b);
+  color: #081108;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(184, 248, 79, 0.22);
+}
+
+.add-btn.compact {
+  min-width: 44px;
+  padding: 0;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.section-head h3 {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}
+
+.section-head span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-card {
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(184, 248, 79, 0.24);
+}
+
+.category-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.category-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.category-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #0f1808;
+}
+
+.category-icon.workout {
+  background: linear-gradient(145deg, #c6ff6f, #88d33a);
+}
+
+.category-icon.habit {
+  background: linear-gradient(145deg, #8bc0ff, #5d86ff);
+}
+
+.category-icon.diet {
+  background: linear-gradient(145deg, #ffb37c, #ff7b66);
+}
+
+.category-icon.custom {
+  background: linear-gradient(145deg, #c7adff, #8a67ff);
+}
+
+.category-copy h4 {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.category-copy p {
+  color: var(--muted);
+  font-size: 12px;
+  max-width: 210px;
+}
+
+.badge {
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(184, 248, 79, 0.14);
+  color: var(--neon);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #25344f;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #bcfd5a, #95d439);
+  transition: width 220ms ease;
+}
+
+.card-meta {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #31415f;
+  background: linear-gradient(170deg, rgba(26, 37, 64, 0.84), rgba(13, 22, 41, 0.92));
+  color: var(--text);
+}
+
+.page-note {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.category-hero {
+  padding: 18px;
+}
+
+.category-hero-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.category-summary {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.summary-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #081108;
+}
+
+.summary-copy h2 {
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+.summary-copy p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.progress-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(184, 248, 79, 0.1);
+  color: var(--neon);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.mini-card {
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(8, 15, 29, 0.72);
+  border: 1px solid rgba(103, 124, 167, 0.18);
+}
+
+.mini-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.mini-card strong {
+  font-size: 18px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 11px 10px;
+  border-radius: 14px;
+  background: rgba(8, 15, 29, 0.82);
+  color: var(--muted);
+  border: 1px solid rgba(102, 123, 166, 0.2);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.tab.active {
+  background: var(--neon);
+  color: #081108;
+  font-weight: 700;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.84), rgba(9, 16, 32, 0.94));
+  border: 1px solid rgba(98, 120, 169, 0.2);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.task:hover {
+  transform: translateY(-1px);
+  border-color: rgba(117, 182, 255, 0.3);
+}
+
+.task.done {
+  opacity: 0.7;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.custom-check {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 9px;
+  border: 2px solid #334662;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.custom-check.checked {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #081108;
+}
+
+.task-copy {
+  min-width: 0;
+}
+
+.task-copy strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.task-copy span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.done-text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-tag {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: var(--blue);
+  background: rgba(117, 182, 255, 0.1);
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 26px 18px;
+  text-align: center;
+  border-radius: 20px;
+  color: var(--muted);
+  background: rgba(8, 15, 29, 0.72);
+  border: 1px dashed rgba(106, 128, 171, 0.3);
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 430px;
+  background: linear-gradient(180deg, rgba(6, 10, 20, 0), rgba(4, 8, 15, 0.98) 26%, rgba(4, 8, 15, 1) 100%);
+  padding: 8px 16px calc(14px + env(safe-area-inset-bottom));
+  z-index: 6;
+}
+
+.nav-shell {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 4px;
+}
+
+.item {
+  text-align: center;
+  color: #6f7ea0;
+  font-size: 12px;
+}
+
+.item .i {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.item.active {
+  color: var(--neon);
+}
+
+.fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #c4ff6c, #98df3b);
+  box-shadow: 0 16px 26px rgba(184, 248, 79, 0.35);
+}
+
+.fab svg {
+  width: 24px;
+  height: 24px;
+  stroke: #081108;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 430px) {
+  .app,
+  .bottom-nav {
+    width: 100%;
+  }
+
+  .app {
+    padding: 18px 14px 118px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .category-hero-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+  }
+
+  .stats-row,
+  .mini-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-main {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="content">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">F</div>
+        <div class="brand-copy">
+          <p>FitCore planner</p>
+          <h1>Daily task flow</h1>
+        </div>
+      </div>
+      <button class="bell" aria-label="Notifications">!</button>
+    </header>
+
+    <section class="screen active" id="home">
+      <section class="stats-row">
+        <article class="stat card">
+          <div class="stat-label">TOTAL</div>
+          <div class="stat-value" id="totalTasks">0</div>
+          <div class="stat-sub">tasks queued</div>
+        </article>
+        <article class="stat card">
+          <div class="stat-label">DONE</div>
+          <div class="stat-value" id="completedTasks">0</div>
+          <div class="stat-sub">completed today</div>
+        </article>
+        <article class="stat card">
+          <div class="stat-label">ACTIVE</div>
+          <div class="stat-value" id="activeCategories">0</div>
+          <div class="stat-sub">categories live</div>
+        </article>
+      </section>
+
+      <article class="card composer">
+        <div class="composer-copy">
+          <h3>Quick capture</h3>
+          <p>Drop a task into your custom list without leaving the dashboard.</p>
+          <div class="input-shell">
+            <input id="homeTaskInput" type="text" placeholder="Add a custom task">
+            <button class="add-btn compact" type="button" onclick="quickAddTask()">+</button>
+          </div>
+        </div>
+      </article>
+
+      <div class="section-head">
+        <h3>CATEGORIES</h3>
+        <span id="categorySummary">0 areas active</span>
+      </div>
+
+      <div class="category-list" id="categoryList"></div>
+    </section>
+
+    <section class="screen" id="category">
+      <div class="toolbar">
+        <button class="back" type="button" onclick="goBack()">
+          <span>&larr;</span>
+          <span>Back</span>
+        </button>
+        <div class="page-note" id="categoryNote">Track one section at a time</div>
+      </div>
+
+      <div id="categoryHeader"></div>
+
+      <article class="card composer">
+        <div class="composer-copy" style="width: 100%;">
+          <h3>Add a task</h3>
+          <p>Keep momentum going by adding the next thing while it is on your mind.</p>
+          <div class="input-shell">
+            <input id="taskInput" type="text" placeholder="Add a task for this category">
+            <button class="add-btn compact" type="button" onclick="addTaskInside()">+</button>
+          </div>
+        </div>
+      </article>
+
+      <div class="tabs" id="tabs"></div>
+      <div class="task-list" id="contentBox"></div>
+    </section>
+  </div>
+</main>
+
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <div class="nav-shell">
+    <a class="item" href="index.html"><span class="i">H</span>Home</a>
+    <a class="item" href="progress.html"><span class="i">P</span>Progress</a>
+    <button class="fab" aria-label="Scan QR code">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 8V6a2 2 0 0 1 2-2h2"></path>
+        <path d="M20 8V6a2 2 0 0 0-2-2h-2"></path>
+        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+        <path d="M20 16v2a2 2 0 0 1-2 2h-2"></path>
+        <rect x="8" y="8" width="3" height="3"></rect>
+        <rect x="13" y="8" width="3" height="3"></rect>
+        <rect x="8" y="13" width="3" height="3"></rect>
+        <path d="M13 13h1v1h1v2h-2z"></path>
+      </svg>
+    </button>
+    <a class="item active" href="task.html"><span class="i">T</span>Tasks</a>
+    <a class="item" href="profile.html"><span class="i">U</span>Profile</a>
+  </div>
+</nav>
+
+<script>
+const storageKey = "fitcore-task-state-v2";
+
+const baseData = {
+  workout: {
+    title: "Workout",
+    short: "WO",
+    description: "Strength blocks for push, pull, and leg days.",
+    accentClass: "workout",
+    tabs: {
+      Push: ["Bench Press", "Shoulder Press", "Tricep Dip", "Chest Fly", "Push-up"],
+      Pull: ["Pull-up", "Deadlift", "Barbell Row", "Face Pull", "Bicep Curl"],
+      Legs: ["Squat", "Lunges", "Leg Press", "Calf Raise", "Leg Curl"]
+    }
+  },
+  habit: {
+    title: "Habits",
+    short: "HB",
+    description: "Small wins that stack up through the week.",
+    accentClass: "habit",
+    tasks: ["Drink Water", "Meditate", "Read", "Sleep 8h", "Stretch"]
+  },
+  diet: {
+    title: "Diet",
+    short: "DT",
+    description: "Meals and nutrition checkpoints for the day.",
+    accentClass: "diet",
+    tasks: ["Breakfast", "Lunch", "Dinner", "Snacks", "Protein Intake"]
+  },
+  custom: {
+    title: "Custom",
+    short: "CU",
+    description: "Flexible space for everything else you want to track.",
+    accentClass: "custom",
+    tasks: ["Prepare gym bag", "Plan tomorrow", "Check weekly goals"]
+  }
+};
+
+let currentCategory = "";
+let currentTab = "Push";
+let state = loadState();
+
+function loadState() {
+  const fallback = {
+    data: JSON.parse(JSON.stringify(baseData)),
+    completed: {}
+  };
+
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(saved);
+    if (!parsed || typeof parsed !== "object") {
+      return fallback;
+    }
+
+    return {
+      data: parsed.data || fallback.data,
+      completed: parsed.completed || {}
+    };
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function saveState() {
+  localStorage.setItem(storageKey, JSON.stringify(state));
+}
+
+function getCategoryItems(categoryKey) {
+  const category = state.data[categoryKey];
+  if (!category) {
+    return [];
+  }
+
+  if (category.tabs) {
+    return category.tabs[currentTab] || [];
+  }
+
+  return category.tasks || [];
+}
+
+function getTaskKey(categoryKey, index) {
+  return categoryKey === "workout"
+    ? categoryKey + "-" + currentTab + "-" + index
+    : categoryKey + "-" + index;
+}
+
+function getCategoryStats(categoryKey) {
+  const category = state.data[categoryKey];
+
+  if (category.tabs) {
+    let total = 0;
+    let done = 0;
+
+    Object.entries(category.tabs).forEach(([tabName, items]) => {
+      total += items.length;
+      items.forEach((item, index) => {
+        if (state.completed["workout-" + tabName + "-" + index]) {
+          done += 1;
+        }
+      });
+    });
+
+    return { total, done };
+  }
+
+  const items = category.tasks || [];
+  let done = 0;
+
+  items.forEach((item, index) => {
+    if (state.completed[categoryKey + "-" + index]) {
+      done += 1;
+    }
+  });
+
+  return { total: items.length, done };
+}
+
+function getGlobalStats() {
+  const keys = Object.keys(state.data);
+  let total = 0;
+  let done = 0;
+
+  keys.forEach((key) => {
+    const stats = getCategoryStats(key);
+    total += stats.total;
+    done += stats.done;
+  });
+
+  return {
+    total,
+    done,
+    percent: total ? Math.round((done / total) * 100) : 0,
+    activeCategories: keys.length
+  };
+}
+
+function updateDashboard() {
+  const stats = getGlobalStats();
+  const ring = document.getElementById("heroRing");
+
+  document.getElementById("heroPercent").textContent = stats.percent + "%";
+  document.getElementById("totalTasks").textContent = stats.total;
+  document.getElementById("completedTasks").textContent = stats.done;
+  document.getElementById("activeCategories").textContent = stats.activeCategories;
+  document.getElementById("categorySummary").textContent = stats.activeCategories + " areas active";
+  ring.style.setProperty("--progress-angle", stats.percent * 3.6 + "deg");
+}
+
+function renderHome() {
+  const list = document.getElementById("categoryList");
+  list.innerHTML = "";
+
+  Object.entries(state.data).forEach(([key, category]) => {
+    const stats = getCategoryStats(key);
+    const percent = stats.total ? Math.round((stats.done / stats.total) * 100) : 0;
+    const nextStep = stats.total - stats.done;
+    const card = document.createElement("article");
+    card.className = "card category-card";
+    card.onclick = function () {
+      openCategory(key);
+    };
+
+    card.innerHTML = `
+      <div class="category-main">
+        <div class="category-left">
+          <div class="category-icon ${category.accentClass}">${category.short}</div>
+          <div class="category-copy">
+            <h4>${category.title}</h4>
+            <p>${category.description}</p>
+          </div>
+        </div>
+        <div class="badge">${stats.total} tasks</div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: ${percent}%;"></div>
+      </div>
+      <div class="card-meta">
+        <span>${stats.done} completed</span>
+        <span>${nextStep} left</span>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+
+  updateDashboard();
+}
+
+function openCategory(categoryKey) {
+  currentCategory = categoryKey;
+  if (categoryKey === "workout") {
+    currentTab = currentTab || "Push";
+  }
+
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("category").classList.add("active");
+  renderCategory();
+}
+
+function goBack() {
+  document.getElementById("category").classList.remove("active");
+  document.getElementById("home").classList.add("active");
+  renderHome();
+}
+
+function renderCategory() {
+  const category = state.data[currentCategory];
+  const stats = getCategoryStats(currentCategory);
+  const percent = stats.total ? Math.round((stats.done / stats.total) * 100) : 0;
+  const categoryHeader = document.getElementById("categoryHeader");
+  const tabs = document.getElementById("tabs");
+  const note = document.getElementById("categoryNote");
+
+  note.textContent = category.description;
+
+  categoryHeader.innerHTML = `
+    <article class="card category-hero">
+      <div class="category-hero-top">
+        <div class="category-summary">
+          <div class="summary-icon category-icon ${category.accentClass}">${category.short}</div>
+          <div class="summary-copy">
+            <h2>${category.title}</h2>
+            <p>${stats.done} of ${stats.total} tasks completed</p>
+          </div>
+        </div>
+        <div class="progress-pill">${percent}% complete</div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: ${percent}%;"></div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <span>DONE</span>
+          <strong>${stats.done}</strong>
+        </div>
+        <div class="mini-card">
+          <span>LEFT</span>
+          <strong>${Math.max(stats.total - stats.done, 0)}</strong>
+        </div>
+        <div class="mini-card">
+          <span>FOCUS</span>
+          <strong>${category.tabs ? currentTab : "TODAY"}</strong>
+        </div>
+      </div>
+    </article>
+  `;
+
+  if (category.tabs) {
+    tabs.innerHTML = Object.keys(category.tabs).map(function (tabName) {
+      const activeClass = tabName === currentTab ? "tab active" : "tab";
+      return `<button class="${activeClass}" type="button" onclick="setTab('${tabName}')">${tabName}</button>`;
+    }).join("");
+    tabs.style.display = "flex";
+  } else {
+    tabs.innerHTML = "";
+    tabs.style.display = "none";
+  }
+
+  renderTaskList();
+}
+
+function renderTaskList() {
+  const list = document.getElementById("contentBox");
+  const items = getCategoryItems(currentCategory);
+
+  list.innerHTML = "";
+
+  if (!items.length) {
+    list.innerHTML = `<div class="empty">No tasks yet. Add your next move and keep the streak going.</div>`;
+    return;
+  }
+
+  items.forEach(function (name, index) {
+    const key = getTaskKey(currentCategory, index);
+    const checked = Boolean(state.completed[key]);
+    const task = document.createElement("article");
+    task.className = checked ? "task done" : "task";
+    task.innerHTML = `
+      <div class="task-left">
+        <button class="custom-check ${checked ? "checked" : ""}" type="button" onclick="toggleTask('${key}')">&#10003;</button>
+        <div class="task-copy">
+          <strong class="${checked ? "done-text" : ""}">${name}</strong>
+          <span>${currentCategory === "workout" ? currentTab + " block" : state.data[currentCategory].title + " task"}</span>
+        </div>
+      </div>
+      <div class="task-tag">${checked ? "DONE" : "ACTIVE"}</div>
+    `;
+    list.appendChild(task);
+  });
+}
+
+function setTab(tabName) {
+  currentTab = tabName;
+  renderCategory();
+}
+
+function toggleTask(key) {
+  state.completed[key] = !state.completed[key];
+  saveState();
+  renderCategory();
+  renderHome();
+}
+
+function addTaskInside() {
+  const input = document.getElementById("taskInput");
+  const value = input.value.trim();
+
+  if (!value) {
+    return;
+  }
+
+  const category = state.data[currentCategory];
+  if (category.tabs) {
+    category.tabs[currentTab].push(value);
+  } else {
+    category.tasks.push(value);
+  }
+
+  input.value = "";
+  saveState();
+  renderCategory();
+  renderHome();
+}
+
+function quickAddTask() {
+  const input = document.getElementById("homeTaskInput");
+  const value = input.value.trim();
+
+  if (!value) {
+    return;
+  }
+
+  state.data.custom.tasks.push(value);
+  input.value = "";
+  saveState();
+  renderHome();
+}
+
+document.getElementById("homeTaskInput").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    quickAddTask();
+  }
+});
+
+document.getElementById("taskInput").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addTaskInside();
+  }
+});
+
+renderHome();
+</script>
+</body>
+</html>
