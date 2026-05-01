@@ -118,6 +118,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .brand {
@@ -151,7 +152,14 @@ button {
   letter-spacing: 0.3px;
 }
 
-.bell {
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bell,
+.settings {
   width: 44px;
   height: 44px;
   border-radius: 16px;
@@ -161,6 +169,15 @@ button {
   place-items: center;
   font-size: 17px;
   position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.bell:hover,
+.settings:hover {
+  border-color: rgba(184, 248, 79, 0.4);
+  background: linear-gradient(170deg, rgba(36, 47, 74, 0.95), rgba(23, 32, 51, 0.95));
+  transform: translateY(-2px);
 }
 
 .bell::after {
@@ -172,6 +189,56 @@ button {
   height: 8px;
   border-radius: 50%;
   background: var(--neon);
+}
+
+.settings-menu {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: linear-gradient(160deg, rgba(15, 24, 42, 0.95), rgba(9, 16, 32, 0.98));
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  min-width: 180px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.settings.active + .settings-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.settings-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: var(--muted-strong);
+  font-size: 13px;
+  border-bottom: 1px solid rgba(94, 119, 168, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-menu-item:last-child {
+  border-bottom: none;
+}
+
+.settings-menu-item:hover {
+  background: rgba(184, 248, 79, 0.08);
+  color: var(--neon);
+  transform: translateX(2px);
+}
+
+.settings-menu-item .icon {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
 }
 
 .card {
@@ -231,10 +298,19 @@ button {
   font-size: 28px;
   font-weight: 800;
   box-shadow: 0 14px 28px rgba(184, 248, 79, 0.24);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 20px 40px rgba(184, 248, 79, 0.35);
+  background: linear-gradient(145deg, #d4ff7c, #a9ee4a);
 }
 
 .identity h2 {
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 4px;
 }
 
@@ -368,7 +444,90 @@ button {
   overflow: hidden;
   margin-top: 12px;
 }
+/* ===== ACHIEVEMENTS ===== */
+.achievements {
+  padding: 16px;
+}
 
+/* ITEM */
+.ach-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 16px;
+  margin-top: 10px;
+  background: rgba(10,18,35,0.6);
+  border: 1px solid rgba(120,150,200,0.12);
+}
+
+/* LEFT SIDE */
+.ach-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ICON */
+.ach-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+
+/* ICON COLORS */
+.icon-green {
+  background: rgba(184,248,79,0.12);
+  color: var(--neon);
+}
+
+.icon-blue {
+  background: rgba(117,182,255,0.12);
+  color: var(--blue);
+}
+
+.icon-purple {
+  background: rgba(167,114,255,0.12);
+  color: var(--violet);
+}
+
+/* TEXT */
+.ach-text strong {
+  display: block;
+  font-size: 13px;
+}
+
+.ach-text span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* RIGHT PILL */
+.ach-value {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* VALUE COLORS */
+.val-green {
+  color: var(--neon);
+  background: rgba(184,248,79,0.12);
+}
+
+.val-blue {
+  color: var(--blue);
+  background: rgba(117,182,255,0.12);
+}
+
+.val-purple {
+  color: var(--violet);
+  background: rgba(167,114,255,0.12);
+}
 .progress > span {
   display: block;
   height: 100%;
@@ -530,7 +689,132 @@ button {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+/* ===============================
+   COMMIT GRAPH (PRO VERSION)
+================================ */
+.commit-graph-card {
+  padding: 18px;
+  border-radius: 22px;
+}
 
+/* Header */
+.commit-graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commit-graph-header h3 {
+  font-size: 15px;
+    padding: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.commit-graph-header p {
+  font-size: 12px;
+  padding: 0 0 20px 0;
+  color: var(--muted);
+}
+
+/* Month Nav */
+.month-nav {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.month-nav button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 12px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  background: rgba(117,182,255,0.08);
+  border: 1px solid rgba(117,182,255,0.18);
+  color: var(--blue);
+
+  transition: all 0.25s ease;
+}
+
+.month-nav button:hover {
+  background: rgba(117,182,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* Graph Layout */
+.commit-graph-container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* SAME ROW HEIGHT EVERYWHERE */
+.commit-days-column{
+  margin-left: 33px;
+}
+.commit-days-column,
+.commit-column {
+  display: grid;
+  grid-template-rows: repeat(7, 16px);;
+  gap: 6px;
+}
+
+/* Days */
+.commit-day-label {
+  height: 16px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+}
+
+/* Grid */
+#monthGrid {
+  display: flex;
+}
+
+/* Each column */
+.commit-column {
+  width: 16px;
+}
+
+/* Boxes */
+.commit-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.commit-box:hover {
+  transform: scale(1.3);
+  border: 1px solid var(--neon);
+}
+
+/* Levels */
+.level-0 { opacity: 0.25; }
+.level-1 { background: rgba(76,175,80,0.25); }
+.level-2 { background: rgba(76,175,80,0.45); }
+.level-3 { background: rgba(76,175,80,0.7); }
+.level-4 { background: #4caf50; }
+
+
+/* ===== ACHIEVEMENTS POLISH ===== */
+.ach-item {
+  transition: all 0.25s ease;
+}
+
+.ach-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(184,248,79,0.3);
+  box-shadow: 0 6px 20px rgba(184,248,79,0.08);
+}
+
+/* ICON GLOW */
+.icon-green { box-shadow: 0 0 10px rgba(184,248,79,0.3); }
+.icon-blue { box-shadow: 0 0 10px rgba(117,182,255,0.3); }
+.icon-purple { box-shadow: 0 0 10px rgba(167,114,255,0.3); }
 @media (max-width: 430px) {
   .app,
   .bottom-nav {
@@ -558,6 +842,52 @@ button {
     font-size: 22px;
   }
 }
+/* ===== FLOATING ACTION BUTTON ===== */
+.fab-btn {
+  position: fixed;
+  bottom: 90px; /* above bottom nav */
+  right: 18px;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+
+  background: linear-gradient(145deg, #c4ff6c, #9be03a);
+  color: #0b1408;
+
+  font-size: 26px;
+  font-weight: 600;
+
+  display: grid;
+  place-items: center;
+
+  box-shadow:
+    0 10px 25px rgba(184, 248, 79, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+
+  transition: all 0.25s ease;
+  z-index: 20;
+}
+
+/* HOVER (subtle, not overdone) */
+.fab-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 32px rgba(184, 248, 79, 0.35);
+}
+
+/* ACTIVE CLICK */
+.fab-btn:active {
+  transform: scale(0.95);
+}
+
+/* MOBILE SAFE */
+@media (max-width: 430px) {
+  .fab-btn {
+    right: 14px;
+    bottom: 100px;
+  }
+}
 </style>
 </head>
 <body>
@@ -571,7 +901,24 @@ button {
           <h1>Profile center</h1>
         </div>
       </div>
-      <button class="bell" aria-label="Notifications">!</button>
+      <div class="topbar-actions">
+        <button class="bell" aria-label="Notifications">!</button>
+        <button class="settings" aria-label="Settings" onclick="this.classList.toggle('active')">⚙</button>
+        <div class="settings-menu">
+          <div class="settings-menu-item">
+            <span class="icon">👤</span>
+            <span>Edit Profile</span>
+          </div>
+          <div class="settings-menu-item">
+            <span class="icon">🔔</span>
+            <span>Notifications</span>
+          </div>
+          <div class="settings-menu-item">
+            <span class="icon">🔐</span>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
     </header>
 
     <article class="card hero">
@@ -582,43 +929,15 @@ button {
             <div class="avatar">AK</div>
             <div class="identity">
               <h2>Alex Kim</h2>
-              <p>Premium member focused on consistency, recovery, and steady weekly wins.</p>
               <div class="badges">
                 <span class="badge" id="levelBadge">Level 7</span>
-                <span class="badge" id="streakBadge">0 day streak</span>
-                <span class="badge" id="doneBadge">0 tasks done</span>
+                <span class="badge" id="streakBadge">5 day streak</span>
               </div>
+              <p id="tasksDone">2 tasks done</p>
             </div>
           </div>
-          <p class="hero-copy" id="heroCopy">Your recent task activity will show up here and keep the profile page in sync with the rest of the app.</p>
         </div>
-        <div class="score-ring" id="scoreRing">
-          <div class="score-ring-inner">
-            <strong id="scoreValue">0%</strong>
-            <span>SCORE</span>
-          </div>
-        </div>
-      </div>
     </article>
-
-    <section class="stats-row">
-      <article class="card stat">
-        <div class="stat-label">TASKS DONE</div>
-        <div class="stat-value" id="doneValue">0</div>
-        <div class="stat-sub">all tracked completions</div>
-      </article>
-      <article class="card stat">
-        <div class="stat-label">TOP AREA</div>
-        <div class="stat-value" id="topValue">-</div>
-        <div class="stat-sub" id="topSub">best performing category</div>
-      </article>
-      <article class="card stat">
-        <div class="stat-label">FOCUS DAYS</div>
-        <div class="stat-value" id="focusValue">0</div>
-        <div class="stat-sub">scheduled in the next 3 days</div>
-      </article>
-    </section>
-
     <section class="mini-grid">
       <article class="card mini-card">
         <span>MONTHLY GOAL</span>
@@ -632,62 +951,141 @@ button {
       </article>
     </section>
 
-    <section class="dual-grid">
-      <article class="card panel">
-        <div class="section-head">
-          <h3>Routine Snapshot</h3>
-          <p>Live from task flow</p>
-        </div>
-        <div class="list" id="routineList"></div>
-      </article>
+<section class="card commit-graph-card">
+  <div class="commit-graph-header">
+    <h3>Task Completions</h3>
+    <p id="monthLabel">May 2026</p>
+  </div>
 
-      <article class="card panel">
-        <div class="section-head">
-          <h3>Security</h3>
-          <p>Account status</p>
-        </div>
-        <div class="list">
-          <div class="list-item">
-            <div>
-              <strong>Two-factor auth</strong>
-              <small>Extra sign-in protection enabled</small>
-            </div>
-            <span class="value-pill good">ON</span>
-          </div>
-          <div class="list-item">
-            <div>
-              <strong>Recovery email</strong>
-              <small>Backup access is verified</small>
-            </div>
-            <span class="value-pill blue">READY</span>
-          </div>
-          <div class="list-item">
-            <div>
-              <strong>Device lock</strong>
-              <small>Trusted device protection active</small>
-            </div>
-            <span class="value-pill good">SAFE</span>
-          </div>
-        </div>
-      </article>
-    </section>
+  <div class="commit-graph-container">
+    <div class="commit-days-column" id="daysColumn"></div>
+    <div id="monthGrid"></div>
+  </div>
+  <div class="month-nav">
+    <button onclick="changeMonth(-1)">◀</button>
+    <button onclick="changeMonth(1)">▶</button>
+  </div>
+</section>
 
-    <section class="card list-card">
-      <h3>Preferences</h3>
-      <div class="switch-row"><span>Push notifications</span><div class="switch on" aria-hidden="true"></div></div>
-      <div class="switch-row"><span>Weekly progress email</span><div class="switch on" aria-hidden="true"></div></div>
-      <div class="switch-row"><span>Visible public profile</span><div class="switch" aria-hidden="true"></div></div>
-    </section>
+<section class="card achievements">
+  <div class="section-head">
+    <h3>Recent Achievements</h3>
+    <p>Momentum rewards</p>
+  </div>
 
-    <section class="card list-card">
-      <div class="section-head">
-        <h3>Recent Achievements</h3>
-        <p>Momentum rewards</p>
-      </div>
-      <div class="list" id="achievementList"></div>
-    </section>
+  <div class="ach-list" id="achievementList"></div>
+</section>
   </div>
 </main>
+
+<script>
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+/* ===== DAYS LABEL ===== */
+function renderDays() {
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const col = document.getElementById("daysColumn");
+  col.innerHTML = "";
+
+  days.forEach(d=>{
+    const el = document.createElement("div");
+    el.className = "commit-day-label";
+    el.textContent = d;
+    col.appendChild(el);
+  });
+}
+
+/* ===== GENERATE SINGLE MONTH GRID ===== */
+function createMonthGrid(month, year) {
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.gap = "6px";
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  let dayCounter = 1;
+
+  for (let w = 0; w < 6; w++) {
+    const col = document.createElement("div");
+    col.className = "commit-column";
+
+    for (let d = 0; d < 7; d++) {
+      const box = document.createElement("div");
+      box.className = "commit-box";
+
+      if ((w === 0 && d < firstDay) || dayCounter > totalDays) {
+        box.style.visibility = "hidden";
+      } else {
+        const level = Math.floor(Math.random() * 5);
+        box.classList.add("level-" + level);
+        dayCounter++;
+      }
+
+      col.appendChild(box);
+    }
+
+    container.appendChild(col);
+  }
+
+  return container;
+}
+
+/* ===== MAIN RENDER ===== */
+function generateMonth() {
+  const grid = document.getElementById("monthGrid");
+  const label = document.getElementById("monthLabel");
+
+  grid.innerHTML = "";
+
+  let nextMonth = currentMonth + 1;
+  let nextYear = currentYear;
+
+  if (nextMonth > 11) {
+    nextMonth = 0;
+    nextYear++;
+  }
+
+  // Label
+  label.textContent =
+    monthNames[currentMonth] + " " + currentYear +
+    "  •  " +
+    monthNames[nextMonth] + " " + nextYear;
+
+  // Month 1
+  const m1 = createMonthGrid(currentMonth, currentYear);
+
+  // Month 2
+  const m2 = createMonthGrid(nextMonth, nextYear);
+
+  grid.appendChild(m1);
+  grid.appendChild(m2);
+}
+
+/* ===== NAVIGATION ===== */
+function changeMonth(step) {
+  currentMonth += step * 2; // move 2 months
+
+  if (currentMonth < 0) {
+    currentMonth += 12;
+    currentYear--;
+  }
+
+  if (currentMonth > 11) {
+    currentMonth -= 12;
+    currentYear++;
+  }
+
+  generateMonth();
+}
+
+/* INIT */
+renderDays();
+generateMonth();
+</script>
 
 <nav class="bottom-nav" aria-label="Bottom navigation">
   <div class="nav-shell">
@@ -798,7 +1196,57 @@ function normalizeTask(item, legacyId) {
     date: ""
   };
 }
+function renderAchievements(stats) {
+  const data = [
+    {
+      icon: "🔥",
+      iconClass: "icon-green",
+      title: "Consistency Master",
+      text: "You're on a " + stats.streak + " day streak",
+      value: "+60 XP",
+      valueClass: "val-green"
+    },
+    {
+      icon: "🎯",
+      iconClass: "icon-blue",
+      title: "Focus Builder",
+      text: stats.focusDays + " days already planned ahead",
+      value: "+40 XP",
+      valueClass: "val-blue"
+    },
+    {
+      icon: "👑",
+      iconClass: "icon-purple",
+      title: "Category Leader",
+      text: stats.topCategory ? stats.topCategory.title + " is dominating your routine" : "No leader yet",
+      value: stats.topCategory ? stats.topCategory.percent + "%" : "--",
+      valueClass: "val-purple"
+    }
+  ];
 
+  const container = document.getElementById("achievementList");
+  container.innerHTML = "";
+
+  data.forEach(item => {
+    const el = document.createElement("div");
+    el.className = "ach-item";
+
+    el.innerHTML = `
+      <div class="ach-left">
+        <div class="ach-icon ${item.iconClass}">${item.icon}</div>
+        <div class="ach-text">
+          <strong>${item.title}</strong>
+          <span>${item.text}</span>
+        </div>
+      </div>
+      <div class="ach-value ${item.valueClass}">
+        ${item.value}
+      </div>
+    `;
+
+    container.appendChild(el);
+  });
+}
 function getCategoryTasks(key) {
   const category = state.data[key];
   if (!category) {
@@ -910,65 +1358,72 @@ function renderRoutine(stats) {
     routineList.appendChild(item);
   });
 }
+function renderRecentActivity(stats) {
+  const container = document.getElementById("recentActivity");
+  if (!container) return;
 
-function renderAchievements(stats) {
-  const achievements = [
-    {
-      title: "Consistency Master",
-      detail: stats.score >= 70 ? "Your completion score is holding strong." : "Keep building daily momentum.",
-      value: "+" + Math.max(60, stats.done * 10) + " XP"
-    },
-    {
-      title: "Focus Builder",
-      detail: stats.focusDays + " planned day slots are already mapped out.",
-      value: "+" + Math.max(40, stats.focusDays * 20) + " XP"
-    },
-    {
-      title: "Category Leader",
-      detail: stats.topCategory ? stats.topCategory.title + " is your strongest lane right now." : "Your strongest category will show here.",
-      value: stats.topCategory ? stats.topCategory.percent + "%" : "--"
-    }
-  ];
+  container.innerHTML = "";
 
-  const list = document.getElementById("achievementList");
-  list.innerHTML = "";
+  let activities = [];
 
-  achievements.forEach(function (achievement, index) {
-    const item = document.createElement("div");
-    item.className = "list-item";
-    item.innerHTML = `
+  stats.categories.forEach(function(cat) {
+    cat.tasks.forEach(function(task) {
+      if (task.date) {
+        activities.push({
+          title: task.title,
+          category: cat.title,
+          date: task.date
+        });
+      }
+    });
+  });
+
+  activities.sort(function(a,b){
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  activities.slice(0,5).forEach(function(act){
+    const el = document.createElement("div");
+    el.className = "list-item";
+
+    el.innerHTML = `
       <div>
-        <strong>${achievement.title}</strong>
-        <small>${achievement.detail}</small>
+        <strong>${act.title}</strong>
+        <small>${act.category} • ${act.date}</small>
       </div>
-      <span class="value-pill ${index === 0 ? "good" : "blue"}">${achievement.value}</span>
+      <span class="value-pill blue">Done</span>
     `;
-    list.appendChild(item);
+
+    container.appendChild(el);
   });
 }
-
 function renderProfile() {
   const stats = getAllStats();
 
-  document.getElementById("scoreValue").textContent = stats.score + "%";
-  document.getElementById("scoreRing").style.setProperty("--progress-angle", stats.score * 3.6 + "deg");
-  document.getElementById("doneValue").textContent = stats.done;
-  document.getElementById("topValue").textContent = stats.topCategory ? stats.topCategory.short : "-";
-  document.getElementById("topSub").textContent = stats.topCategory
-    ? stats.topCategory.title + " leads at " + stats.topCategory.percent + "%"
-    : "best performing category";
-  document.getElementById("focusValue").textContent = stats.focusDays;
-  document.getElementById("goalValue").textContent = stats.monthlyGoal + "%";
-  document.getElementById("goalBar").style.width = stats.monthlyGoal + "%";
-  document.getElementById("categoryValue").textContent = stats.activeCategories;
-  document.getElementById("streakBadge").textContent = stats.streak + " day streak";
-  document.getElementById("doneBadge").textContent = stats.done + " tasks done";
-  document.getElementById("heroCopy").textContent = stats.topCategory
-    ? stats.topCategory.title + " is leading your profile right now, and your account view now matches the rest of the app."
-    : "Your recent task activity will show up here and keep the profile page in sync with the rest of the app.";
+  // SAFE updates (only if element exists)
+  const score = document.getElementById("scoreValue");
+  if (score) score.textContent = stats.score + "%";
 
-  renderRoutine(stats);
+  const ring = document.getElementById("scoreRing");
+  if (ring) ring.style.setProperty("--progress-angle", stats.score * 3.6 + "deg");
+
+  const goal = document.getElementById("goalValue");
+  if (goal) goal.textContent = stats.monthlyGoal + "%";
+
+  const bar = document.getElementById("goalBar");
+  if (bar) bar.style.width = stats.monthlyGoal + "%";
+
+  const cat = document.getElementById("categoryValue");
+  if (cat) cat.textContent = stats.activeCategories;
+
+  const streak = document.getElementById("streakBadge");
+  if (streak) streak.textContent = stats.streak + " day streak";
+
+  // ✅ render achievements
   renderAchievements(stats);
+
+  // ✅ render recent activity (NEW)
+  renderRecentActivity(stats);
 }
 
 renderProfile();
