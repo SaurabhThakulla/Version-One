@@ -1,7 +1,14 @@
-import express from 'express';
-import cors from 'cors';
-import { createServer } from 'http';
-import { Server } from 'socket.io'; 
-import { v4 as uuidv4 } from 'uuid';
+import express from "express";
+import signup from "./routes/signup";
+const app = express();
 
-const app = express();  
+app.use(express.json());
+app.use("/signup", signup);
+
+app.get("/", (req, res) => {
+    res.send("Server is Running");
+})
+
+app.listen(3000, () => {
+    console.log("Server is Running on Port 3000");
+})
