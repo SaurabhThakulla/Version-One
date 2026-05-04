@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,system-ui,Arial;
+}
+
+body{
+  background:#0a1815;
+  color:#e5e7eb;
+}
+
+.container{
+  max-width:430px;
+  margin:auto;
+  padding:16px;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:16px;
+  justify-content:space-between;
+}
+
+.back{
+  font-size:20px;
+  cursor:pointer;
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:contain;
+  display:block;
+}
+
+/* CARD */
+.section{
+  background:#111827;
+  border-radius:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.section-title{
+  padding:14px 16px;
+  font-size:12px;
+  color:#00ffc8;
+  font-weight:600;
+}
+
+/* ITEM */
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.left{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.icon{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-size:16px;
+  background:rgba(255,255,255,0.05);
+}
+
+.text{
+  display:flex;
+  flex-direction:column;
+}
+
+.title{
+  font-size:14px;
+}
+
+.sub{
+  font-size:11px;
+  color:#9ca3af;
+}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:#00ffc8;
+}
+
+.arrow{
+  color:#6b7280;
+}
+
+/* TOGGLE */
+.toggle{
+  width:40px;
+  height:22px;
+  background:#374151;
+  border-radius:20px;
+  position:relative;
+  cursor:pointer;
+}
+
+.toggle::after{
+  content:"";
+  width:18px;
+  height:18px;
+  background:white;
+  position:absolute;
+  top:2px;
+  left:2px;
+  border-radius:50%;
+  transition:0.3s;
+}
+
+.toggle.active{
+  background:#00ffc8;
+}
+
+.toggle.active::after{
+  left:20px;
+}
+
+/* SUPPORT GRID */
+.support{
+  display:flex;
+  justify-content:space-around;
+  padding:14px 10px;
+}
+
+.support div{
+  text-align:center;
+  font-size:11px;
+  color:#9ca3af;
+}
+
+.support span{
+  display:block;
+  font-size:18px;
+  margin-bottom:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="back">←</div>
+    Settings
+    <img src="logo.png" alt="FitCore Logo" class="logo" />
+  </div>
+
+  <!-- ACCOUNT -->
+  <div class="section">
+    <div class="section-title">ACCOUNT</div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">👤</div>
+        <div class="text">
+          <div class="title">Profile</div>
+          <div class="sub">View and edit your profile</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🎯</div>
+        <div class="text">
+          <div class="title">Goals</div>
+          <div class="sub">Set and manage your goals</div>
+        </div>
+      </div>
+      <div class="right">3 Active ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">⬛</div>
+        <div class="text">
+          <div class="title">Categories</div>
+          <div class="sub">Manage your habit categories</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">📱</div>
+        <div class="text">
+          <div class="title">Apps & Devices</div>
+          <div class="sub">Connect and manage devices</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🔒</div>
+        <div class="text">
+          <div class="title">Change Password</div>
+          <div class="sub">Update your password</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🚪</div>
+        <div class="text">
+          <div class="title">Log Out</div>
+          <div class="sub">Sign out of your account</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <!-- TRACKING -->
+  <div class="section">
+    <div class="section-title">TRACKING & TASKS</div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">📋</div>
+        <div class="text">
+          <div class="title">Daily Tasks Settings</div>
+          <div class="sub">Customize your daily task list</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🛡️</div>
+        <div class="text">
+          <div class="title">Habit Tracking Mode</div>
+          <div class="sub">Choose how habits are tracked</div>
+        </div>
+      </div>
+      <div class="right">Strict ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🔥</div>
+        <div class="text">
+          <div class="title">Streak Rules</div>
+          <div class="sub">Define your streak calculation</div>
+        </div>
+      </div>
+      <div class="right">12 days ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">📅</div>
+        <div class="text">
+          <div class="title">Missed Day Handling</div>
+          <div class="sub">Set rules for missed days</div>
+        </div>
+      </div>
+      <div class="right">Ask me ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🔔</div>
+        <div class="text">
+          <div class="title">Task Reminder Defaults</div>
+          <div class="sub">Set default reminders</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <!-- HEALTH -->
+  <div class="section">
+    <div class="section-title">HEALTH & DATA</div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">👟</div>
+        <div class="text">
+          <div class="title">Steps</div>
+          <div class="sub">Track and sync your steps</div>
+        </div>
+      </div>
+      <div class="right">7,846 ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">📊</div>
+        <div class="text">
+          <div class="title">Weekly Progress</div>
+          <div class="sub">View your weekly insights</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🍎</div>
+        <div class="text">
+          <div class="title">Nutrition</div>
+          <div class="sub">Manage your nutrition goals</div>
+        </div>
+      </div>
+      <div class="right">Coming Soon ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🔄</div>
+        <div class="text">
+          <div class="title">Data & Sync</div>
+          <div class="sub">Sync your data</div>
+        </div>
+      </div>
+      <div class="right">Synced ›</div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">NOTIFICATIONS</div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">⏰</div>
+        <div class="text">
+          <div class="title">Reminders</div>
+          <div class="sub">Manage reminders</div>
+        </div>
+      </div>
+      <div class="right">5 Active ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">📱</div>
+        <div class="text">
+          <div class="title">Push Notifications</div>
+          <div class="sub">Manage push notifications</div>
+        </div>
+      </div>
+      <div class="toggle active"></div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">⚡</div>
+        <div class="text">
+          <div class="title">Smart Alerts</div>
+          <div class="sub">Get personalized nudges</div>
+        </div>
+      </div>
+      <div class="toggle active"></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="section">
+    <div class="section-title">APP SETTINGS</div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🌙</div>
+        <div class="text">
+          <div class="title">Appearance</div>
+          <div class="sub">Customize app theme</div>
+        </div>
+      </div>
+      <div class="right">Dark ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🌐</div>
+        <div class="text">
+          <div class="title">Language</div>
+          <div class="sub">Change app language</div>
+        </div>
+      </div>
+      <div class="right">English ›</div>
+    </div>
+
+    <div class="item">
+      <div class="left">
+        <div class="icon">🛡️</div>
+        <div class="text">
+          <div class="title">Privacy</div>
+          <div class="sub">Manage privacy settings</div>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="section">
+    <div class="section-title">SUPPORT & MORE</div>
+
+    <div class="support">
+      <div><span>❓</span>Help</div>
+      <div><span>💬</span>Feedback</div>
+      <div><span>🎧</span>Contact</div>
+      <div><span>🧪</span>Beta</div>
+      <div><span>ℹ️</span>About</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll(".toggle").forEach(function(t){
+  t.addEventListener("click", function(){
+    t.classList.toggle("active");
+  });
+});
+</script>
+
+</body>
+</html>
