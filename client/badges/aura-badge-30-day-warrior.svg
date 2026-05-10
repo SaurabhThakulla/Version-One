@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs><radialGradient id="g" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#c77dff"/><stop offset="100%" stop-color="#4a0080"/></radialGradient></defs>
+<rect width="200" height="200" fill="#08080f"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#9d4edd" stroke-width="5" opacity="0.6"/>
+<circle cx="100" cy="100" r="78" fill="url(#g)"/>
+<ellipse cx="74" cy="68" rx="24" ry="16" fill="rgba(255,255,255,0.1)" transform="rotate(-25,74,68)"/>
+<path d="M100 44 L136 56 L136 94 C136 114 118 128 100 136 C82 128 64 114 64 94 L64 56 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.45)" stroke-width="3"/>
+<path d="M100 50 L130 61 L130 92 C130 110 114 122 100 130 C86 122 70 110 70 92 L70 61 Z" fill="rgba(200,150,255,0.2)"/>
+<path d="M104 66 L88 95 L100 95 L92 128 L116 88 L102 88 Z" fill="#ffd700" opacity="0.97"/>
+<path d="M46 104 C40 96 38 82 42 70 C44 64 48 60 52 56 C50 66 54 68 56 62 C60 70 60 80 58 90 C56 98 52 104 46 104Z" fill="#ff8c00" opacity="0.8"/>
+<path d="M154 104 C160 96 162 82 158 70 C156 64 152 60 148 56 C150 66 146 68 144 62 C140 70 140 80 142 90 C144 98 148 104 154 104Z" fill="#ff8c00" opacity="0.8"/>
+<text x="100" y="175" text-anchor="middle" font-size="13" font-weight="800" fill="white" font-family="Inter,sans-serif">30 DAY WARRIOR</text>
+</svg>

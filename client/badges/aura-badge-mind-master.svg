@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs><radialGradient id="g" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#6ee7b7"/><stop offset="100%" stop-color="#065f46"/></radialGradient></defs>
+<rect width="200" height="200" fill="#08080f"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#10b981" stroke-width="4" opacity="0.5"/>
+<circle cx="100" cy="100" r="78" fill="url(#g)"/>
+<ellipse cx="74" cy="68" rx="22" ry="14" fill="rgba(255,255,255,0.1)" transform="rotate(-25,74,68)"/>
+<path d="M100 56 C84 56 62 66 62 88 C62 96 66 102 72 106 C68 110 68 120 74 124 C76 130 86 132 100 132 C114 132 124 130 126 124 C132 120 132 110 128 106 C134 102 138 96 138 88 C138 66 116 56 100 56Z" fill="none" stroke="white" stroke-width="4" opacity="0.8"/>
+<line x1="100" y1="57" x2="100" y2="131" stroke="white" stroke-width="3" opacity="0.35"/>
+<circle cx="78" cy="86" r="6" fill="#a7f3d0" opacity="0.95"/>
+<circle cx="122" cy="86" r="6" fill="#a7f3d0" opacity="0.95"/>
+<circle cx="78" cy="108" r="6" fill="#6ee7b7" opacity="0.85"/>
+<circle cx="122" cy="108" r="6" fill="#6ee7b7" opacity="0.85"/>
+<line x1="78" y1="86" x2="122" y2="86" stroke="#6ee7b7" stroke-width="2" opacity="0.5"/>
+<line x1="78" y1="108" x2="122" y2="108" stroke="#6ee7b7" stroke-width="2" opacity="0.5"/>
+<line x1="78" y1="86" x2="78" y2="108" stroke="#6ee7b7" stroke-width="2" opacity="0.4"/>
+<line x1="122" y1="86" x2="122" y2="108" stroke="#6ee7b7" stroke-width="2" opacity="0.4"/>
+<text x="100" y="175" text-anchor="middle" font-size="13" font-weight="800" fill="white" font-family="Inter,sans-serif">MIND MASTER</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs><radialGradient id="g" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#ff9a3c"/><stop offset="100%" stop-color="#c0392b"/></radialGradient></defs>
+<rect width="200" height="200" fill="#08080f"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#ff5722" stroke-width="5" opacity="0.6"/>
+<circle cx="100" cy="100" r="78" fill="url(#g)"/>
+<ellipse cx="74" cy="68" rx="24" ry="16" fill="rgba(255,255,255,0.1)" transform="rotate(-30,74,68)"/>
+<path d="M100 136 C65 120 46 94 54 56 C58 36 74 24 88 18 C80 44 94 50 98 36 C110 54 124 74 118 102 C112 122 106 132 100 136Z" fill="#ffe0a0" opacity="0.9"/>
+<path d="M100 136 C69 120 56 98 60 72 C65 50 78 38 88 30 C84 52 96 58 100 46 C110 63 120 84 114 108 C108 126 104 133 100 136Z" fill="#ffb347"/>
+<path d="M100 136 C76 122 66 105 70 84 C74 62 86 50 96 42 C93 62 100 68 104 56 C112 74 116 94 110 114 C106 128 102 133 100 136Z" fill="#e74c3c"/>
+<text x="100" y="120" text-anchor="middle" font-size="32" font-weight="900" fill="white" opacity="0.9" font-family="Inter,sans-serif">10</text>
+<text x="100" y="175" text-anchor="middle" font-size="13" font-weight="800" fill="white" font-family="Inter,sans-serif">10 DAY STREAK</text>
+</svg>

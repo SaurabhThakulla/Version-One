@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs><radialGradient id="g" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#60a5ff"/><stop offset="100%" stop-color="#1e3a8a"/></radialGradient></defs>
+<rect width="200" height="200" fill="#08080f"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#3b82f6" stroke-width="5" opacity="0.6"/>
+<circle cx="100" cy="100" r="86" fill="none" stroke="#60a5ff" stroke-width="2" stroke-dasharray="6 6" opacity="0.3"/>
+<circle cx="100" cy="100" r="78" fill="url(#g)"/>
+<ellipse cx="72" cy="68" rx="26" ry="18" fill="rgba(255,255,255,0.1)" transform="rotate(-25,72,68)"/>
+<path d="M50 100 C50 82 64 70 80 70 C90 70 96 80 100 100 C104 120 110 130 120 130 C136 130 150 118 150 100 C150 82 136 70 120 70 C110 70 104 80 100 100 C96 120 90 130 80 130 C64 130 50 118 50 100Z" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" opacity="0.95"/>
+<circle cx="100" cy="100" r="8" fill="white" opacity="0.9"/>
+<circle cx="100" cy="100" r="4" fill="#3b82f6"/>
+<circle cx="52" cy="100" r="7" fill="#7dd3fc"/>
+<circle cx="148" cy="100" r="7" fill="#7dd3fc"/>
+<text x="100" y="175" text-anchor="middle" font-size="12" font-weight="800" fill="white" font-family="Inter,sans-serif">CONSISTENCY PRO</text>
+</svg>

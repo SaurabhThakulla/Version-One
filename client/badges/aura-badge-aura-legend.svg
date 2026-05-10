@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<defs>
+<radialGradient id="g" cx="50%" cy="40%" r="65%"><stop offset="0%" stop-color="#f0abfc"/><stop offset="40%" stop-color="#818cf8"/><stop offset="100%" stop-color="#1e1b4b"/></radialGradient>
+<radialGradient id="g2" cx="50%" cy="30%" r="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.3)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+</defs>
+<rect width="200" height="200" fill="#08080f"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="6 3" opacity="0.5"/>
+<circle cx="100" cy="100" r="84" fill="none" stroke="#818cf8" stroke-width="3" opacity="0.35"/>
+<circle cx="100" cy="100" r="78" fill="url(#g)"/>
+<circle cx="100" cy="100" r="78" fill="url(#g2)"/>
+<ellipse cx="100" cy="100" rx="62" ry="24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3" transform="rotate(-20,100,100)"/>
+<ellipse cx="100" cy="100" rx="62" ry="24" fill="none" stroke="rgba(200,180,255,0.2)" stroke-width="2" transform="rotate(20,100,100)"/>
+<circle cx="100" cy="100" r="26" fill="white" opacity="0.12"/>
+<circle cx="100" cy="100" r="15" fill="white" opacity="0.9"/>
+<circle cx="100" cy="100" r="8" fill="#c084fc"/>
+<line x1="100" y1="28" x2="100" y2="58" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="100" y1="142" x2="100" y2="172" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="28" y1="100" x2="58" y2="100" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="142" y1="100" x2="172" y2="100" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="54" y1="54" x2="72" y2="72" stroke="#e879f9" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+<line x1="146" y1="54" x2="128" y2="72" stroke="#e879f9" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+<line x1="54" y1="146" x2="72" y2="128" stroke="#818cf8" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+<line x1="146" y1="146" x2="128" y2="128" stroke="#818cf8" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+<text x="40" y="50" font-size="16" fill="#e879f9" opacity="0.95" font-family="sans-serif">✦</text>
+<text x="160" y="46" font-size="12" fill="#a5f3fc" opacity="0.9" font-family="sans-serif">✦</text>
+<text x="162" y="170" font-size="14" fill="#c084fc" opacity="0.8" font-family="sans-serif">✦</text>
+<text x="32" y="170" font-size="11" fill="#818cf8" opacity="0.8" font-family="sans-serif">✦</text>
+<text x="100" y="175" text-anchor="middle" font-size="13" font-weight="800" fill="white" font-family="Inter,sans-serif">AURA LEGEND</text>
+</svg>
