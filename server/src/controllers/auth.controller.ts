@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { loginSchema, signupSchema } from "../utils/zod.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
+import "dotenv/config"
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -24,9 +25,11 @@ export const signup = async (req: Request, res: Response) => {
                username,
                email: normalizedEmail,
                password: hashpassword,
-           })
+           })    
+        const token = jwt.sign({email}, process.env.JWT_SECRET as string)
            return  res.status(201).json({
                success: true,
+               token,
                message: `${username} has been created`
            })
        } catch (error) {
@@ -57,8 +60,10 @@ export const login = async (req: Request, res: Response) => {
                 message: "Email or password is wrong"
             })
         }
+        const token = jwt.sign({email},process.env.JWT_SECRET as string)
         return res.status(200).json({
             success: true,
+            token,
             message: "Login successful"
         })
     } catch (error) {
