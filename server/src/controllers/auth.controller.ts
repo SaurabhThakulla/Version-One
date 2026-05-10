@@ -3,6 +3,8 @@ import type { Request, Response } from "express";
 import { users } from "../db/schema.js"
 import { eq } from "drizzle-orm";
 import { loginSchema, signupSchema } from "../utils/zod.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -11,6 +13,7 @@ export const signup = async (req: Request, res: Response) => {
         const normalizedEmail = email.trim().toLowerCase();
         const search = await db.select().from(users).where(eq(users.email, normalizedEmail));
         const foundUser = search[0];
+        const hashpassword = await bcrypt.hash(password, 10);
         if (foundUser) {
             return res.status(409).json({
                 success: false,
@@ -20,7 +23,7 @@ export const signup = async (req: Request, res: Response) => {
            await db.insert(users).values({
                username,
                email: normalizedEmail,
-               password,
+               password: hashpassword,
            })
            return  res.status(201).json({
                success: true,
@@ -41,26 +44,23 @@ export const login = async (req: Request, res: Response) => {
         const normalizedEmail = email.trim().toLowerCase();
         const user = await db.select().from(users).where(eq(users.email, normalizedEmail));
         const founduser = user[0];
-        if (founduser) {
-            if (founduser.password === password) {
-                return res.status(200).json({
-                    success: true,
-                    message:"Login Sucessfull"
-                })
-            }
-            else {
-                return res.status(401).json({
-                    success: false,
-                    message: "Email or password is wrong"
-                })
-            }
-        }
-        else {
+        if (!founduser) {
             return res.status(401).json({
                 success: false,
-                message: "Something Went Wrong"
+                message: "Email or password is wrong"
             })
         }
+        const isPasswordValid = await bcrypt.compare(password, founduser.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: "Email or password is wrong"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Login successful"
+        })
     } catch (error) {
         return res.status(500).json({
             success: false,
