@@ -21,12 +21,18 @@ export const signup = async (req: Request, res: Response) => {
                 message: 'failed to create the user'
             })
         }
-           await db.insert(users).values({
+        const newUser = await db.insert(users).values({
                username,
                email: normalizedEmail,
                password: hashpassword,
-           })    
-        const token = jwt.sign({email}, process.env.JWT_SECRET as string)
+           }).returning()
+        const user = newUser[0];
+
+        if (!user) {
+            return res.status(500).json({ success: false, message: 'failed to create the user' })
+        }
+        
+        const token = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_SECRET as string)
            return  res.status(201).json({
                success: true,
                token,
@@ -60,7 +66,7 @@ export const login = async (req: Request, res: Response) => {
                 message: "Email or password is wrong"
             })
         }
-        const token = jwt.sign({email},process.env.JWT_SECRET as string)
+        const token = jwt.sign({email, id: founduser.id},process.env.JWT_SECRET as string)
         return res.status(200).json({
             success: true,
             token,
