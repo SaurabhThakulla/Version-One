@@ -9,19 +9,23 @@ export const categoriesRouter = express.Router()
 
 categoriesRouter.post('/add-categories', async (req: Request, res: Response) => {
     try {
-       Category.parse(req.body)
-        const { title } = req.body;
-        const userId = (req as Request & { userId?: { id: string } }).userId?.id;
+       const parsed = Category.parse(req.body)
+        const { title } = parsed;
+        const userId = req.userId?.id;
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        }
        await db.insert(category).values({
            title,
-           userid: userId ?? ""
+           userid: userId
        })
         console.log(`User ${userId} created category`)
        return res.status(201).json({
            success: true,
            message:"Category has been Created"
        })
-   } catch (error) {
+    } catch (error) {
+       console.error("Failed to create category:", error) 
        return res.status(500).json({
            success: false,
            message: "Failed to create category"
@@ -31,16 +35,19 @@ categoriesRouter.post('/add-categories', async (req: Request, res: Response) => 
 
 categoriesRouter.put("/update-categories/:id", async (req: Request, res: Response) => {
     try {
-        Category.parse(req.body)
-        const { title } = req.body;
+        const parse = Category.parse(req.body)
+        const { title } =parse;
         const { id } = req.params
-        const userId = (req as Request & { userId?: { id: string } }).userId?.id;
+        const userId = req.userId?.id
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        }
          await db.update(category).set({
             title
          }).where(
              and(
                  eq(category.id, id),
-                 eq(category.userid, userId ?? "")
+                 eq(category.userid, userId)
             )
         )
         console.log(`User ${userId} updated category ${id}`)
@@ -50,6 +57,7 @@ categoriesRouter.put("/update-categories/:id", async (req: Request, res: Respons
         })
 
     } catch (error) {
+        console.error("Failed to update category:", error) 
         return res.status(500).json({
             success: false,
             message: "Failed to update category"
@@ -60,11 +68,14 @@ categoriesRouter.put("/update-categories/:id", async (req: Request, res: Respons
 categoriesRouter.delete("/delete-categories/:id", async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const userId = (req as Request & { userId?: { id: string } }).userId?.id;
+        const userId = req.userId?.id
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        }
         await db.delete(category).where(
             and(
                 eq(category.id, id),
-                eq(category.userid, userId ?? "")
+                eq(category.userid, userId)
                 
             )
         )
@@ -75,6 +86,7 @@ categoriesRouter.delete("/delete-categories/:id", async (req: Request, res: Resp
         })
 
     } catch (error) {
+        console.error("Failed to delete category:", error) 
         return res.status(500).json({
             success: false,
             message: "Failed to delete category"
@@ -84,8 +96,11 @@ categoriesRouter.delete("/delete-categories/:id", async (req: Request, res: Resp
 
 categoriesRouter.get("/get-categories/", async (req: Request, res: Response) => {
     try {
-        const userId = (req as Request & { userId?: { id: string } }).userId?.id;
-         const categories = await db.select().from(category).where(eq(category.userid, userId ?? ""))
+        const userId = req.userId?.id
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        }
+        const categories = await db.select().from(category).where(eq(category.userid, userId))
         return res.status(200).json({
             success: true,
             categories,
@@ -93,6 +108,7 @@ categoriesRouter.get("/get-categories/", async (req: Request, res: Response) => 
         })
 
     } catch (error) {
+        console.error("Failed to get category:", error) 
         return res.status(500).json({
             success: false,
             message: "Failed to get category"
