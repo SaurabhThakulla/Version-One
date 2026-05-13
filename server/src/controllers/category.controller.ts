@@ -4,6 +4,7 @@ import express from "express"
 import type { Request, Response } from "express"
 import { and, eq } from "drizzle-orm";
 import { Category } from "../utils/zod.js";
+import { ZodError } from "zod";
 
 export const categoriesRouter = express.Router()
 
@@ -11,11 +12,20 @@ categoriesRouter.post('/add-categories', async (req: Request, res: Response) => 
     try {
        const parsed = Category.parse(req.body)
         const { title } = parsed;
-        const userId = req.userId?.id;
-        if (!userId) {
-            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        const userId = req.userId!.id;
+        const existing = await db.select().from(category).where(and(
+            eq(category.title, title),
+            eq(category.userid, userId)
+        ))
+
+        if (existing.length > 0) {
+            return res.status(409).json({
+                success: false,
+                message: "Category already exist"
+            })
         }
-       await db.insert(category).values({
+
+        await db.insert(category).values({
            title,
            userid: userId
        })
@@ -25,8 +35,14 @@ categoriesRouter.post('/add-categories', async (req: Request, res: Response) => 
            message:"Category has been Created"
        })
     } catch (error) {
-       console.error("Failed to create category:", error) 
-       return res.status(500).json({
+        console.error("Failed to create category:", error) 
+        if (error instanceof ZodError) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Input"
+            })
+        }
+        return res.status(500).json({
            success: false,
            message: "Failed to create category"
        })
@@ -36,28 +52,45 @@ categoriesRouter.post('/add-categories', async (req: Request, res: Response) => 
 categoriesRouter.put("/update-categories/:id", async (req: Request, res: Response) => {
     try {
         const parse = Category.parse(req.body)
-        const { title } =parse;
+        const { title } = parse;
         const { id } = req.params
-        const userId = req.userId?.id
-        if (!userId) {
-            return res.status(401).json({ success: false, message: 'Unauthorized' })
-        }
-         await db.update(category).set({
-            title
-         }).where(
-             and(
-                 eq(category.id, id),
-                 eq(category.userid, userId)
+        const userId = req.userId!.id;
+
+        const existing = await db.select().from(category).where(
+            and(
+                eq(category.id, id),
+                eq(category.userid, userId)
             )
         )
+
+        if (existing.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Category not found"
+            })
+        }
+
+        await db.update(category).set({ title }).where(
+            and(
+                eq(category.id, id),
+                eq(category.userid, userId)
+            )
+        )
+
         console.log(`User ${userId} updated category ${id}`)
         return res.status(200).json({
             success: true,
-            message:"Edited the category"
+            message: "Edited the category"
         })
 
     } catch (error) {
-        console.error("Failed to update category:", error) 
+        console.error("Failed to update category:", error)
+        if (error instanceof ZodError) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Input"
+            })
+        }
         return res.status(500).json({
             success: false,
             message: "Failed to update category"
@@ -68,9 +101,16 @@ categoriesRouter.put("/update-categories/:id", async (req: Request, res: Respons
 categoriesRouter.delete("/delete-categories/:id", async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const userId = req.userId?.id
-        if (!userId) {
-            return res.status(401).json({ success: false, message: 'Unauthorized' })
+        const userId = req.userId!.id
+        const existing = await db.select().from(category).where(and(
+            eq(category.id, id),
+            eq(category.userid, userId)
+        ))
+        if (existing.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Category not found"
+            })
         }
         await db.delete(category).where(
             and(
@@ -96,10 +136,7 @@ categoriesRouter.delete("/delete-categories/:id", async (req: Request, res: Resp
 
 categoriesRouter.get("/get-categories/", async (req: Request, res: Response) => {
     try {
-        const userId = req.userId?.id
-        if (!userId) {
-            return res.status(401).json({ success: false, message: 'Unauthorized' })
-        }
+        const userId = req.userId!.id
         const categories = await db.select().from(category).where(eq(category.userid, userId))
         return res.status(200).json({
             success: true,
