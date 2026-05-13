@@ -32,7 +32,8 @@
     // "noUnusedParameters": true,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
-
+    //type
+     "typeRoots": ["./src/types", "./node_modules/@types"],
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
