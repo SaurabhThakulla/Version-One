@@ -1,13 +1,10 @@
 import jwt from "jsonwebtoken"
 import type { Request, Response, NextFunction } from "express"
 
-interface AuthRequest extends Request {
-    userId?: any
-}
 
-export const authmiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization
+export const authmiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
+        const token = req.headers.authorization?.split(" ")[1]
         if (!token) {
            return res.status(401).json({
                 success: false,
@@ -15,8 +12,15 @@ export const authmiddleware = (req: AuthRequest, res: Response, next: NextFuncti
             })
         }
         else {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET as string)
-            req.userId=decoded
+            const secret = process.env.JWT_SECRET
+            if (!secret) {
+                return res.status(500).json({ success: false, message: "Secret not configured" })
+            }
+            const decoded = jwt.verify(token, secret)
+            if (typeof decoded === "string" || !decoded.id) {
+                return res.status(401).json({ success: false, message: "Invalid token" })
+            }
+            req.userId = { id: decoded.id }
             next();
         }
     } catch (error) {
