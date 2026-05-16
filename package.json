@@ -1,0 +1,18 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "description": "Root workspace for mobile and server development",
+    "scripts": {
+        "dev": "concurrently --names \"server,mobile\" --prefix-colors \"blue,green\" \"npm run dev -w server\" \"npm run start -w client-mobile\"",
+        "dev:server": "npm run dev -w server",
+        "dev:mobile": "npm run start -w client-mobile",
+        "install:all": "npm install"
+    },
+    "workspaces": [
+        "server",
+        "client-mobile"
+    ],
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
