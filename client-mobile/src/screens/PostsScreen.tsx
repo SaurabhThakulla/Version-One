@@ -10,7 +10,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 import CreateActionCard from "../components/ui/CreateActionCard";
 import SmoothScrollView from "../components/ui/SmoothScrollView";
-
 import { styles } from "../styling/Page/feedStyles";
 
 const posts = [

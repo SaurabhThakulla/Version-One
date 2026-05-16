@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     View,
     Text,
     ScrollView,
     TouchableOpacity,
-    Modal,
-    TextInput,
     StyleSheet,
-    ActivityIndicator,
     Alert,
 } from "react-native";
 import { styles } from "../styling/Page/categoryStyles";
@@ -54,23 +51,24 @@ const categories = [
 ];
 
 export default function categoriesScreen() {
-    const [showModal, setShowModal] = useState(false);
-    const [categoryTitle, setCategoryTitle] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    const handleCreateCategory = () => {
-        if (!categoryTitle.trim()) {
+    const handleCreateCategory = (title: string, description: string) => {
+        if (!title.trim()) {
             Alert.alert("Error", "Please enter a category title");
-            return;
+            return Promise.resolve();
         }
 
-        setLoading(true);
-        setTimeout(() => {
-            Alert.alert("Success", `Category "${categoryTitle}" created!`);
-            setCategoryTitle("");
-            setShowModal(false);
-            setLoading(false);
-        }, 1000);
+        return new Promise<void>((resolve) => {
+            setTimeout(() => {
+                Alert.alert(
+                    "Success",
+                    description.trim()
+                        ? `Category "${title}" created with description.`
+                        : `Category "${title}" created!`
+                );
+                resolve();
+            }, 1000);
+        });
     };
 
     return (
@@ -174,7 +172,7 @@ export default function categoriesScreen() {
                 eyebrow="Category Tools"
                 helperText="Workout, diet, habits"
                 accentColor="#C8FF4D"
-                onPress={() => setShowModal(true)}
+                onCreate={handleCreateCategory}
             />
     
             {/* CATEGORY LIST */}
@@ -265,153 +263,8 @@ export default function categoriesScreen() {
                 </View>
             ))}
 
-            {/* ADD CATEGORY MODAL */}
-            <Modal
-                visible={showModal}
-                transparent={true}
-                animationType="fade"
-                onRequestClose={() => !loading && setShowModal(false)}
-            >
-                <View style={modalStyles.overlay}>
-                    <View style={modalStyles.container}>
-                        {/* Header */}
-                        <View style={modalStyles.header}>
-                            <Text style={modalStyles.headerTitle}>Create Category</Text>
-                            <TouchableOpacity
-                                onPress={() => !loading && setShowModal(false)}
-                                disabled={loading}
-                            >
-                                <Ionicons name="close" size={28} color="#fff" />
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Form */}
-                        <View style={modalStyles.form}>
-                            <View style={modalStyles.formGroup}>
-                                <Text style={modalStyles.label}>Category Title</Text>
-                                <TextInput
-                                    style={modalStyles.input}
-                                    placeholder="Enter category title"
-                                    placeholderTextColor="#666"
-                                    value={categoryTitle}
-                                    onChangeText={setCategoryTitle}
-                                    editable={!loading}
-                                    maxLength={20}
-                                />
-                                <Text style={modalStyles.charCount}>
-                                    {categoryTitle.length}/20
-                                </Text>
-                            </View>
-
-                            {/* Buttons */}
-                            <View style={modalStyles.buttonGroup}>
-                                <TouchableOpacity
-                                    style={[modalStyles.button, modalStyles.cancelBtn]}
-                                    onPress={() => setShowModal(false)}
-                                    disabled={loading}
-                                >
-                                    <Text style={modalStyles.cancelText}>Cancel</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    style={[modalStyles.button, modalStyles.createBtn]}
-                                    onPress={handleCreateCategory}
-                                    disabled={loading}
-                                >
-                                    {loading ? (
-                                        <ActivityIndicator color="#051008" size="small" />
-                                    ) : (
-                                        <Text style={modalStyles.createText}>Create</Text>
-                                    )}
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-            </Modal>
+            
         </ScrollView>
     );
 }
-
-const modalStyles = StyleSheet.create({
-    overlay: {
-        flex: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    container: {
-        backgroundColor: "#081324",
-        borderRadius: 24,
-        padding: 24,
-        width: "85%",
-        maxHeight: "80%",
-    },
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 24,
-    },
-    headerTitle: {
-        fontSize: 24,
-        fontWeight: "800",
-        color: "#fff",
-    },
-    form: {
-        gap: 20,
-    },
-    formGroup: {
-        gap: 8,
-    },
-    label: {
-        fontSize: 14,
-        fontWeight: "600",
-        color: "#E8EDF3",
-    },
-    input: {
-        backgroundColor: "#1C2433",
-        borderWidth: 1.5,
-        borderColor: "#243040",
-        borderRadius: 14,
-        height: 48,
-        paddingHorizontal: 16,
-        color: "#E8EDF3",
-        fontSize: 16,
-    },
-    charCount: {
-        fontSize: 12,
-        color: "#8EA0BF",
-        textAlign: "right",
-    },
-    buttonGroup: {
-        flexDirection: "row",
-        gap: 12,
-        marginTop: 20,
-    },
-    button: {
-        flex: 1,
-        height: 48,
-        borderRadius: 14,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    cancelBtn: {
-        backgroundColor: "transparent",
-        borderWidth: 1.5,
-        borderColor: "#243040",
-    },
-    createBtn: {
-        backgroundColor: "#C8FF4D",
-    },
-    cancelText: {
-        fontSize: 16,
-        fontWeight: "600",
-        color: "#E8EDF3",
-    },
-    createText: {
-        fontSize: 16,
-        fontWeight: "600",
-        color: "#051008",
-    },
-});
+ 
