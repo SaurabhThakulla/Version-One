@@ -7,6 +7,7 @@ import ProgressScreen from "../screens/ProgressScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ScanScreen from "../screens/ScanScreen";
 import TasksScreen from "../screens/TasksScreen";
+import CategoriesScreen from "../screens/CategoryScreen"
 import BottomNavbar from "./NavBar";
 import { MainTabKey, RootStackParamList } from "../types/types";
 
@@ -26,6 +27,8 @@ export default function MainShell() {
                 return <ScanScreen />;
             case "Tasks":
                 return <TasksScreen />;
+            case "category":
+                return <CategoriesScreen />;
             case "Profile":
                 return <ProfileScreen />;
             case "Home":

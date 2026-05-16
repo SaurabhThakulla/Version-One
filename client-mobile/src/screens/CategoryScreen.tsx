@@ -1,0 +1,417 @@
+import React, { useState } from "react";
+import {
+    View,
+    Text,
+    ScrollView,
+    TouchableOpacity,
+    Modal,
+    TextInput,
+    StyleSheet,
+    ActivityIndicator,
+    Alert,
+} from "react-native";
+import { styles } from "../styling/Page/categoryStyles";
+import { Ionicons } from "@expo/vector-icons";
+import CreateActionCard from "../components/ui/CreateActionCard";
+
+const categories = [
+    {
+        id: 1,
+        title: "Workout",
+        short: "WO",
+        description:
+            "Strength blocks for push, pull, and leg days.",
+        tasks: "15 tasks",
+        completed: 4,
+        left: 11,
+        color: "#C8FF4D",
+        progress: "35%",
+    },
+    {
+        id: 2,
+        title: "Habits",
+        short: "HB",
+        description:
+            "Small wins that stack up through the week.",
+        tasks: "5 tasks",
+        completed: 5,
+        left: 0,
+        color: "#79A8FF",
+        progress: "100%",
+    },
+    {
+        id: 3,
+        title: "Diet",
+        short: "DT",
+        description:
+            "Meals and nutrition checkpoints for the day.",
+        tasks: "5 tasks",
+        completed: 0,
+        left: 5,
+        color: "#FF9B6A",
+        progress: "0%",
+    },
+];
+
+export default function categoriesScreen() {
+    const [showModal, setShowModal] = useState(false);
+    const [categoryTitle, setCategoryTitle] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleCreateCategory = () => {
+        if (!categoryTitle.trim()) {
+            Alert.alert("Error", "Please enter a category title");
+            return;
+        }
+
+        setLoading(true);
+        setTimeout(() => {
+            Alert.alert("Success", `Category "${categoryTitle}" created!`);
+            setCategoryTitle("");
+            setShowModal(false);
+            setLoading(false);
+        }, 1000);
+    };
+
+    return (
+        <ScrollView
+            style={styles.container}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+                paddingBottom: 120,
+            }}
+        >
+            {/* HEADER */}
+            <View style={styles.header}>
+                <View style={styles.headerLeft}>
+                    <View style={styles.logo}>
+                        <Text style={styles.logoText}>
+                            FC
+                        </Text>
+                    </View>
+
+                    <View>
+                        <Text style={styles.smallText}>
+                            FitCore planner
+                        </Text>
+
+                        <Text style={styles.title}>
+                            Daily category flow
+                        </Text>
+                    </View>
+                </View>
+
+                <TouchableOpacity
+                    style={styles.notificationBtn}
+                    onPress={() => Alert.alert("Notifications", "You have no new notifications")}
+                    activeOpacity={0.7}
+                >
+                    <Ionicons
+                        name="notifications-outline"
+                        size={18}
+                        color="#fff"
+                    />
+                </TouchableOpacity>
+            </View>
+
+            {/* STATS */}
+            <View style={styles.statsRow}>
+                <View style={styles.statCard}>
+                    <Text style={styles.statLabel}>
+                        TOTAL
+                    </Text>
+
+                    <Text style={styles.statValue}>
+                        0
+                    </Text>
+
+                    <Text style={styles.statNote}>
+                        categories queued
+                    </Text>
+                </View>
+
+                <View style={styles.statCard}>
+                    <Text style={styles.statLabel}>
+                        DONE
+                    </Text>
+
+                    <Text style={styles.statValue}>
+                        0
+                    </Text>
+
+                    <Text style={styles.statNote}>
+                        completed today
+                    </Text>
+                </View>
+
+                <View style={styles.statCard}>
+                    <Text style={styles.statLabel}>
+                        ACTIVE
+                    </Text>
+
+                    <Text style={styles.statValue}>
+                        0
+                    </Text>
+
+                    <Text style={styles.statNote}>
+                        categories live
+                    </Text>
+                </View>
+            </View>
+            {/* CATEGORY HEADER */}
+            <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>
+                    CATEGORIES
+                </Text>
+            </View>
+
+            {/* CREATE ACTION CARD */}
+            <CreateActionCard
+                title="Add Category"
+                description="Create and organize workout, diet, and habit categories from one reusable action card."
+                iconName="view-grid-plus-outline"
+                buttonText="Create Category"
+                eyebrow="Category Tools"
+                helperText="Workout, diet, habits"
+                accentColor="#C8FF4D"
+                onPress={() => setShowModal(true)}
+            />
+    
+            {/* CATEGORY LIST */}
+            {categories.map((item) => (
+                <View
+                    key={item.id}
+                    style={styles.categoryCard}
+                >
+                    <View style={styles.categoryTop}>
+                        <View
+                            style={[
+                                styles.categoryIcon,
+                                {
+                                    backgroundColor:
+                                        item.color,
+                                },
+                            ]}
+                        >
+                            <Text
+                                style={
+                                    styles.categoryIconText
+                                }
+                            >
+                                {item.short}
+                            </Text>
+                        </View>
+
+                        <View
+                            style={
+                                styles.categoryContent
+                            }
+                        >
+                            <Text
+                                style={
+                                    styles.categoryTitle
+                                }
+                            >
+                                {item.title}
+                            </Text>
+
+                            <Text
+                                style={
+                                    styles.categoryDescription
+                                }
+                            >
+                                {item.description}
+                            </Text>
+                        </View>
+
+                        <View style={styles.taskBadge}>
+                            <Text
+                                style={
+                                    styles.taskBadgeText
+                                }
+                            >
+                                {item.tasks}
+                            </Text>
+                        </View>
+                    </View>
+
+                    {/* PROGRESS */}
+                    <View style={styles.progressBar}>
+                        <View
+                            style={[
+                                styles.progressFill,
+                                {
+                                    width: typeof item.progress === 'string' ? parseFloat(item.progress) : item.progress,
+                                    backgroundColor:
+                                        item.color,
+                                },
+                            ]}
+                        />
+                    </View>
+
+                    <View style={styles.progressBottom}>
+                        <Text
+                            style={styles.progressText}
+                        >
+                            {item.completed} completed
+                        </Text>
+
+                        <Text
+                            style={styles.progressText}
+                        >
+                            {item.left} left
+                        </Text>
+                    </View>
+                </View>
+            ))}
+
+            {/* ADD CATEGORY MODAL */}
+            <Modal
+                visible={showModal}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => !loading && setShowModal(false)}
+            >
+                <View style={modalStyles.overlay}>
+                    <View style={modalStyles.container}>
+                        {/* Header */}
+                        <View style={modalStyles.header}>
+                            <Text style={modalStyles.headerTitle}>Create Category</Text>
+                            <TouchableOpacity
+                                onPress={() => !loading && setShowModal(false)}
+                                disabled={loading}
+                            >
+                                <Ionicons name="close" size={28} color="#fff" />
+                            </TouchableOpacity>
+                        </View>
+
+                        {/* Form */}
+                        <View style={modalStyles.form}>
+                            <View style={modalStyles.formGroup}>
+                                <Text style={modalStyles.label}>Category Title</Text>
+                                <TextInput
+                                    style={modalStyles.input}
+                                    placeholder="Enter category title"
+                                    placeholderTextColor="#666"
+                                    value={categoryTitle}
+                                    onChangeText={setCategoryTitle}
+                                    editable={!loading}
+                                    maxLength={20}
+                                />
+                                <Text style={modalStyles.charCount}>
+                                    {categoryTitle.length}/20
+                                </Text>
+                            </View>
+
+                            {/* Buttons */}
+                            <View style={modalStyles.buttonGroup}>
+                                <TouchableOpacity
+                                    style={[modalStyles.button, modalStyles.cancelBtn]}
+                                    onPress={() => setShowModal(false)}
+                                    disabled={loading}
+                                >
+                                    <Text style={modalStyles.cancelText}>Cancel</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={[modalStyles.button, modalStyles.createBtn]}
+                                    onPress={handleCreateCategory}
+                                    disabled={loading}
+                                >
+                                    {loading ? (
+                                        <ActivityIndicator color="#051008" size="small" />
+                                    ) : (
+                                        <Text style={modalStyles.createText}>Create</Text>
+                                    )}
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        </ScrollView>
+    );
+}
+
+const modalStyles = StyleSheet.create({
+    overlay: {
+        flex: 1,
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    container: {
+        backgroundColor: "#081324",
+        borderRadius: 24,
+        padding: 24,
+        width: "85%",
+        maxHeight: "80%",
+    },
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 24,
+    },
+    headerTitle: {
+        fontSize: 24,
+        fontWeight: "800",
+        color: "#fff",
+    },
+    form: {
+        gap: 20,
+    },
+    formGroup: {
+        gap: 8,
+    },
+    label: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: "#E8EDF3",
+    },
+    input: {
+        backgroundColor: "#1C2433",
+        borderWidth: 1.5,
+        borderColor: "#243040",
+        borderRadius: 14,
+        height: 48,
+        paddingHorizontal: 16,
+        color: "#E8EDF3",
+        fontSize: 16,
+    },
+    charCount: {
+        fontSize: 12,
+        color: "#8EA0BF",
+        textAlign: "right",
+    },
+    buttonGroup: {
+        flexDirection: "row",
+        gap: 12,
+        marginTop: 20,
+    },
+    button: {
+        flex: 1,
+        height: 48,
+        borderRadius: 14,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    cancelBtn: {
+        backgroundColor: "transparent",
+        borderWidth: 1.5,
+        borderColor: "#243040",
+    },
+    createBtn: {
+        backgroundColor: "#C8FF4D",
+    },
+    cancelText: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#E8EDF3",
+    },
+    createText: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#051008",
+    },
+});

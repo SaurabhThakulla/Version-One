@@ -1,44 +1,131 @@
 import React from "react";
 import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+} from "react-native";
+
+import {
     Ionicons,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
-import AppSectionScreen from "../components/ui/AppSectionScreen";
-
 export default function ScanScreen() {
     return (
-        <AppSectionScreen
-            eyebrow="Quick Action"
-            title="Scan Hub"
-            description="Use one tap to log workouts, meals, or gym check-ins without typing anything."
-            heroTitle="Ready to Scan"
-            heroDescription="Point your camera at a gym QR, meal code, or task card and we will fill the details automatically."
-            heroAction="Open Camera  ->"
-            heroColors={["#D4FF6A", "#B8F84F", "#8BD132"]}
-            heroIcon={<MaterialCommunityIcons name="qrcode-scan" size={30} color="#091108" />}
-            insights={[
-                {
-                    icon: <Ionicons name="scan-outline" size={20} color="#C8FF63" />,
-                    label: "Today's Scans",
-                    value: "04",
-                    note: "Workout + hydration + meals",
-                    accentBackground: "rgba(184,248,79,0.10)",
-                    accentText: "#C8FF63",
-                },
-                {
-                    icon: <MaterialCommunityIcons name="history" size={20} color="#8FD7FF" />,
-                    label: "Saved Shortcuts",
-                    value: "11",
-                    note: "Fast recurring templates",
-                    accentBackground: "rgba(120,183,255,0.12)",
-                    accentText: "#8FD7FF",
-                },
-            ]}
-            summaryTitle="Smart Scan Tips"
-            summaryDescription="Keep the code inside the frame and hold still for a second. Bright lighting makes the capture much faster."
-            summaryAction="Learn More  ->"
-            summaryIcon={<Ionicons name="sparkles-outline" size={24} color="#B8F84F" />}
-        />
+        <View style={styles.container}>
+            <View style={styles.card}>
+                <View style={styles.iconWrapper}>
+                    <MaterialCommunityIcons
+                        name="tools"
+                        size={42}
+                        color="#C8FF4D"
+                    />
+                </View>
+
+                <Text style={styles.title}>
+                    Feature Coming Soon
+                </Text>
+
+                <Text style={styles.description}>
+                    The scan feature is currently under
+                    development and will be implemented in
+                    a future update of FitCore.
+                </Text>
+
+                <View style={styles.badge}>
+                    <Ionicons
+                        name="time-outline"
+                        size={14}
+                        color="#C8FF4D"
+                    />
+
+                    <Text style={styles.badgeText}>
+                        In Progress
+                    </Text>
+                </View>
+
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>
+                        Stay Tuned
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#05060D",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 20,
+    },
+
+    card: {
+        width: "100%",
+        backgroundColor: "#0B1220",
+        borderRadius: 30,
+        padding: 26,
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: "#1A2B47",
+    },
+
+    iconWrapper: {
+        width: 90,
+        height: 90,
+        borderRadius: 999,
+        backgroundColor: "rgba(200,255,77,0.08)",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 24,
+    },
+
+    title: {
+        color: "#fff",
+        fontSize: 24,
+        fontWeight: "900",
+        marginBottom: 10,
+    },
+
+    description: {
+        color: "#9DA8BE",
+        fontSize: 14,
+        lineHeight: 22,
+        textAlign: "center",
+        marginBottom: 24,
+    },
+
+    badge: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "rgba(200,255,77,0.10)",
+        paddingHorizontal: 14,
+        paddingVertical: 8,
+        borderRadius: 999,
+        marginBottom: 28,
+    },
+
+    badgeText: {
+        color: "#C8FF4D",
+        marginLeft: 6,
+        fontWeight: "700",
+        fontSize: 12,
+    },
+
+    button: {
+        backgroundColor: "#C8FF4D",
+        paddingHorizontal: 24,
+        paddingVertical: 12,
+        borderRadius: 16,
+    },
+
+    buttonText: {
+        color: "#000",
+        fontWeight: "800",
+        fontSize: 14,
+    },
+});

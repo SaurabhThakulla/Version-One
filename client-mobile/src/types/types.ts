@@ -4,6 +4,7 @@ export type MainTabKey =
     | "Home"
     | "Progress"
     | "Scan"
+    | "category"
     | "Tasks"
     | "Profile";
 

@@ -1,7 +1,5 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import {
+import { SafeAreaView } from "react-native-safe-area-context";import {
     Text,
     TextInput,
     TouchableOpacity,
@@ -10,7 +8,7 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 
-import CustomButton from "../components/ui/CustomButton";
+import CreateActionCard from "../components/ui/CreateActionCard";
 import SmoothScrollView from "../components/ui/SmoothScrollView";
 
 import { styles } from "../styling/Page/feedStyles";
@@ -48,7 +46,6 @@ export default function FeedScreen() {
             <SmoothScrollView
                 contentContainerStyle={styles.scrollContainer}
             >
-                {/* HEADER */}
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
                         <View style={styles.logoBox}>
@@ -75,7 +72,6 @@ export default function FeedScreen() {
                     </TouchableOpacity>
                 </View>
 
-                {/* SEARCH */}
                 <View style={styles.searchWrapper}>
                     <View style={styles.searchBox}>
                         <Ionicons
@@ -92,44 +88,18 @@ export default function FeedScreen() {
                     </View>
                 </View>
 
-                {/* CREATE POST */}
-                <View style={styles.createPostCard}>
-                    <View style={styles.createPostTop}>
-                        <View style={styles.userAvatar}>
-                            <Text style={styles.userAvatarText}>Y</Text>
-                        </View>
-
-                        <TouchableOpacity style={styles.postInput}>
-                            <Text style={styles.postPlaceholder}>
-                                Share your workout progress...
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.postActions}>
-                        <TouchableOpacity style={styles.actionButton}>
-                            <Text style={styles.actionText}>
-                                📸 Photo
-                            </Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.actionButton}>
-                            <Text style={styles.actionText}>
-                                🎥 Video
-                            </Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.actionButton}>
-                            <Text style={styles.actionText}>
-                                🔥 Progress
-                            </Text>
-                        </TouchableOpacity>
-
-                        <CustomButton title="Post" />
-                    </View>
+                <View style={styles.createActionWrap}>
+                    <CreateActionCard
+                        title="Add Post"
+                        description="Share workout progress, questions, meals, and milestone updates from one reusable action card."
+                        iconName="message-plus-outline"
+                        buttonText="Create Post"
+                        eyebrow="Community Post"
+                        helperText="Photos, progress, questions"
+                        accentColor="#C8FF4D"
+                    />
                 </View>
 
-                {/* SECTION */}
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>
                         Hot Posts
@@ -142,14 +112,12 @@ export default function FeedScreen() {
                     </View>
                 </View>
 
-                {/* POSTS */}
                 <View style={styles.postsWrapper}>
                     {posts.map((post) => (
                         <View
                             key={post.id}
                             style={styles.postCard}
                         >
-                            {/* VOTES */}
                             <View style={styles.voteSection}>
                                 <TouchableOpacity style={styles.voteButton}>
                                     <Ionicons
@@ -172,7 +140,6 @@ export default function FeedScreen() {
                                 </TouchableOpacity>
                             </View>
 
-                            {/* CONTENT */}
                             <View style={styles.postContent}>
                                 <View style={styles.postMeta}>
                                     <View style={styles.postAuthor}>
@@ -239,19 +206,13 @@ export default function FeedScreen() {
                                 <View style={styles.postActionsBottom}>
                                     <TouchableOpacity>
                                         <Text style={styles.bottomActionText}>
-                                            💬 {post.comments}
+                                            Comments {post.comments}
                                         </Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity>
                                         <Text style={styles.bottomActionText}>
-                                            🔁 Share
-                                        </Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity>
-                                        <Text style={styles.bottomActionText}>
-                                            ⭐ Save
+                                            Share
                                         </Text>
                                     </TouchableOpacity>
                                 </View>

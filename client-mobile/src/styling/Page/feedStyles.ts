@@ -87,73 +87,9 @@ export const styles = StyleSheet.create({
         color: "white",
     },
 
-    createPostCard: {
+    createActionWrap: {
         marginHorizontal: 20,
         marginTop: 20,
-        borderRadius: 28,
-        backgroundColor: "#171720",
-        borderWidth: 1,
-        borderColor: "rgba(255,255,255,0.1)",
-        padding: 20,
-    },
-
-    createPostTop: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 16,
-    },
-
-    userAvatar: {
-        width: 56,
-        height: 56,
-        borderRadius: 18,
-        backgroundColor: "#C8F53B",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-
-    userAvatarText: {
-        color: "black",
-        fontWeight: "700",
-        fontSize: 18,
-    },
-
-    postInput: {
-        flex: 1,
-        height: 56,
-        borderRadius: 18,
-        backgroundColor: "rgba(255,255,255,0.05)",
-        borderWidth: 1,
-        borderColor: "rgba(255,255,255,0.05)",
-        justifyContent: "center",
-        paddingHorizontal: 16,
-    },
-
-    postPlaceholder: {
-        color: "#8C8CA1",
-    },
-
-    postActions: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 12,
-        marginTop: 20,
-    },
-
-    actionButton: {
-        paddingHorizontal: 16,
-        height: 40,
-        borderRadius: 16,
-        backgroundColor: "rgba(255,255,255,0.05)",
-        borderWidth: 1,
-        borderColor: "rgba(255,255,255,0.05)",
-        justifyContent: "center",
-    },
-
-    actionText: {
-        color: "white",
-        fontSize: 12,
-        fontWeight: "600",
     },
 
     sectionHeader: {

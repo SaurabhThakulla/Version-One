@@ -17,7 +17,7 @@ export default function CustomButton({
         <TouchableOpacity
             onPress={onPress}
             style={styles.button}
-            activeOpacity={0.85}
+            activeOpacity={0.7}
         >
             <Text style={styles.text}>
                 {title}
@@ -28,7 +28,8 @@ export default function CustomButton({
 
 const styles = StyleSheet.create({
     button: {
-        height: 40,
+        height: 48,
+        minWidth: 120,
 
         backgroundColor: "#2DD4BF",
 

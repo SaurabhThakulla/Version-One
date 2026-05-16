@@ -62,8 +62,8 @@ const navItems: NavItem[] = [
         ),
     },
     {
-        key: "Tasks",
-        label: "Tasks",
+        key: "category",
+        label: "category",
         renderIcon: (active) => (
             <Ionicons
                 name={active ? "grid" : "grid-outline"}
