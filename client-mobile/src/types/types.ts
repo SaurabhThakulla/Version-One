@@ -2,10 +2,9 @@ declare module "*.css";
 
 export type MainTabKey =
     | "Home"
-    | "Progress"
     | "Scan"
     | "category"
-    | "Tasks"
+    | "Posts"
     | "Profile";
 
 export type RootStackParamList = {

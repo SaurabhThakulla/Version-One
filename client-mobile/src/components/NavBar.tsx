@@ -39,8 +39,8 @@ const navItems: NavItem[] = [
         ),
     },
     {
-        key: "Progress",
-        label: "Progress",
+        key: "Posts",
+        label: "Posts",
         renderIcon: (active) => (
             <MaterialCommunityIcons
                 name={active ? "chart-box" : "chart-box-outline"}
