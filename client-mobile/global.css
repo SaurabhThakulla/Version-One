@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-0: #050812;
+  --bg-1: #081224;
+  --panel: #0d1526;
+  --panel-soft: #131f36;
+  --line: #243252;
+
+  --text: #ecf1ff;
+  --muted: #8e9bb6;
+
+  --neon: #b8f84f;
+  --blue: #75b6ff;
+  --violet: #a772ff;
+
+  --radius: 24px;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  background:
+    radial-gradient(circle at 10% -10%, #19345f 0%, rgba(25, 52, 95, 0) 40%),
+    radial-gradient(circle at 100% 18%, #0f2d4d 0%, rgba(15, 45, 77, 0) 34%),
+    linear-gradient(160deg, var(--bg-0), #050b17 58%, #031022 100%);
+  color: var(--text);
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1120;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #243252;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #34476f;
+}
+
+/* =========================
+   COMMON UTILITIES
+========================= */
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  margin: auto;
+  padding-inline: 16px;
+}
+
+.card {
+  background: linear-gradient(
+    160deg,
+    rgba(15, 24, 42, 0.88),
+    rgba(9, 16, 32, 0.94)
+  );
+
+  border: 1px solid rgba(98, 120, 169, 0.23);
+
+  border-radius: var(--radius);
+
+  box-shadow:
+    0 12px 40px rgba(2, 7, 15, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-neon {
+  color: var(--neon);
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.text-violet {
+  color: var(--violet);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+  padding: 12px 18px;
+  border-radius: 14px;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(145deg, #c4ff6c, #98df3b);
+  color: #081108;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(184, 248, 79, 0.2);
+}
+
+.btn-secondary {
+  background: rgba(7, 13, 26, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #111b31;
+  border: 1px solid #2b3a59;
+  color: var(--text);
+}
+
+.input::placeholder {
+  color: #7d8aa6;
+}
+
+.input:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 0 4px rgba(184, 248, 79, 0.12);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.fade-up {
+  animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.breathe {
+  animation: breathe 3s infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .card {
+    border-radius: 20px;
+  }
+
+  .btn {
+    padding: 10px 14px;
+  }
+}

@@ -19,3 +19,10 @@ export const Task = z.object({
     title: z.string().trim().min(2).max(20),
     description:z.string().trim().min(2).max(50)
 })
+export const EditTask = z.object({
+    title: z.string().trim().min(2).max(20),
+    description: z.string().trim().min(2).max(50),
+})
+export const UpdateTask = z.object({
+    status:z.boolean()
+})
