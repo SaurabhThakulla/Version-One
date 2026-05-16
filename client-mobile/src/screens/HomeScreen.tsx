@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,6 +13,7 @@ import Svg, {
 } from "react-native-svg";
 
 import { styles } from "../styling/Page/homeStyles";
+import SmoothScrollView from "../components/ui/SmoothScrollView";
 
 const logo = require("../../assets/logo.png");
 
@@ -126,8 +127,7 @@ export default function HomeScreen() {
             <View style={styles.backgroundGlowLeft} />
             <View style={styles.backgroundGlowRight} />
 
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <SmoothScrollView
                 contentContainerStyle={styles.scrollContent}
             >
                 <View style={styles.header}>
@@ -371,7 +371,7 @@ export default function HomeScreen() {
                         ))}
                     </View>
                 </View>
-            </ScrollView>
+            </SmoothScrollView>
         </SafeAreaView>
     );
 }

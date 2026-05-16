@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import {
-    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -8,6 +7,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import SmoothScrollView from "./SmoothScrollView";
 
 type InsightCard = {
     icon: ReactNode;
@@ -55,8 +55,7 @@ export default function AppSectionScreen({
             <View style={styles.glowLeft} />
             <View style={styles.glowRight} />
 
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <SmoothScrollView
                 contentContainerStyle={styles.scrollContent}
             >
                 <Text style={styles.eyebrow}>
@@ -164,7 +163,7 @@ export default function AppSectionScreen({
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+            </SmoothScrollView>
         </SafeAreaView>
     );
 }

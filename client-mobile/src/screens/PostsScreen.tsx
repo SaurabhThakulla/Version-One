@@ -2,7 +2,6 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
-    ScrollView,
     Text,
     TextInput,
     TouchableOpacity,
@@ -12,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import CustomButton from "../components/ui/CustomButton";
+import SmoothScrollView from "../components/ui/SmoothScrollView";
 
 import { styles } from "../styling/Page/feedStyles";
 
@@ -45,8 +45,7 @@ const posts = [
 export default function FeedScreen() {
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <SmoothScrollView
                 contentContainerStyle={styles.scrollContainer}
             >
                 {/* HEADER */}
@@ -260,7 +259,7 @@ export default function FeedScreen() {
                         </View>
                     ))}
                 </View>
-            </ScrollView>
+            </SmoothScrollView>
         </SafeAreaView>
     );
 }

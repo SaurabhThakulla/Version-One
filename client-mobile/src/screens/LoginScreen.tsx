@@ -1,5 +1,4 @@
 import {
-    ScrollView,
     View,
     Text,
     TouchableOpacity,
@@ -12,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import ScreenWrapper from "../components/ui/ScreenWrapper";
 import CustomInput from "../components/ui/CustomInput";
 import CustomButton from "../components/ui/CustomButton";
+import SmoothScrollView from "../components/ui/SmoothScrollView";
 import { styles } from "../styling/Auth/signupStyles";
 
 const logo = require("../../assets/logo.png");
@@ -31,8 +31,7 @@ export default function LoginScreen() {
         useNavigation<NavigationProp>();
     return (
         <ScreenWrapper>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <SmoothScrollView
                 contentContainerStyle={styles.scrollContainer}
             >
                 {/* Header */}
@@ -143,7 +142,7 @@ export default function LoginScreen() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+            </SmoothScrollView>
         </ScreenWrapper>
     );
 }

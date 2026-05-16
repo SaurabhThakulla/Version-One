@@ -1,5 +1,4 @@
 import {
-    ScrollView,
     View,
     Text,
     TouchableOpacity,
@@ -11,6 +10,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import ScreenWrapper from "../components/ui/ScreenWrapper";
 import CustomInput from "../components/ui/CustomInput";
 import CustomButton from "../components/ui/CustomButton";
+import SmoothScrollView from "../components/ui/SmoothScrollView";
 const logo = require("../../assets/logo.png");
 import { styles } from "../styling/Auth/signupStyles";
 import { useNavigation }
@@ -33,8 +33,7 @@ export default function SignupScreen() {
         useNavigation<NavigationProp>();
     return (
         <ScreenWrapper>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+            <SmoothScrollView
                 contentContainerStyle={styles.scrollContainer}
                 keyboardShouldPersistTaps="handled"
             >
@@ -181,7 +180,7 @@ export default function SignupScreen() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+            </SmoothScrollView>
         </ScreenWrapper>
     );
 }
