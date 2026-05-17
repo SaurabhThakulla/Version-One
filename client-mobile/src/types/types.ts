@@ -8,6 +8,7 @@ export type MainTabKey =
     | "Profile";
 
 export type RootStackParamList = {
+    PreSignup: undefined;
     Login: undefined;
     Signup: undefined;
     Main:
