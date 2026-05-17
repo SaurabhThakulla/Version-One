@@ -17,12 +17,13 @@ export type AuthResponse = {
 	token?: string;
 };
 
-export const signup = async (payload: SignupPayload) => {
-	const response = await api.post<AuthResponse>("/signup", payload);
+
+export const login = async (data: { email: string; password: string }) => {
+	const response = await api.post("/login", data);  
 	return response.data;
 };
 
-export const login = async (payload: LoginPayload) => {
-	const response = await api.post<AuthResponse>("/login", payload);
+export const signup = async (data: { username: string; email: string; password: string }) => {
+	const response = await api.post("/signup", data);  
 	return response.data;
 };

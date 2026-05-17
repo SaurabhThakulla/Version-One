@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     Image,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -17,6 +17,7 @@ import { styles } from "../styling/Auth/signupStyles";
 import { login } from "../api/auth";
 import { useAuthStore } from "../store/authStore";
 import { Alert } from "react-native";
+import axios from "axios";
 
 const logo = require("../../assets/logo.png");
 import {
@@ -30,6 +31,7 @@ export default function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const token = useAuthStore((state) => state.token);
     const setToken = useAuthStore((state) => state.setToken);
 
     type NavigationProp =
@@ -38,6 +40,15 @@ export default function LoginScreen() {
         >;
     const navigation =
         useNavigation<NavigationProp>();
+
+    useEffect(() => {
+        if (token) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: "Main" }],
+            });
+        }
+    }, [token]);
 
     const handleLogin = async () => {
         if (!email || !password) {
@@ -55,7 +66,13 @@ export default function LoginScreen() {
 
             await setToken(response.token);
         } catch (error) {
-            Alert.alert("Login failed", "Please check your details and try again.");
+            const message = axios.isAxiosError<{ message?: string }>(error)
+                ? error.response?.data?.message ??
+                (error.message.includes("Network Error")
+                    ? "Cannot reach server. Check EXPO_PUBLIC_API_URL and ensure backend is running on port 4000."
+                    : "Please check your details and try again.")
+                : "Please check your details and try again.";
+            Alert.alert("Login failed", message);
         } finally {
             setIsSubmitting(false);
         }

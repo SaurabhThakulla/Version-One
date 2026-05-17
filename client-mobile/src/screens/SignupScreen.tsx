@@ -5,7 +5,7 @@ import {
     Image,
     Alert,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import ScreenWrapper from "../components/ui/ScreenWrapper";
@@ -32,6 +32,7 @@ export default function SignupScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const token = useAuthStore((state) => state.token);
     const setToken = useAuthStore((state) => state.setToken);
 
     type NavigationProp =
@@ -40,6 +41,15 @@ export default function SignupScreen() {
         >;
     const navigation =
         useNavigation<NavigationProp>();
+
+    useEffect(() => {
+        if (token) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: "Main" }],
+            });
+        }
+    }, [token]);
 
     const handleSignup = async () => {
         if (!isAgreed) {
