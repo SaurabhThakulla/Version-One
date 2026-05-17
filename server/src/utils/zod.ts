@@ -1,3 +1,4 @@
+import { title } from "node:process"
 import { z } from "zod"
 
 export const signupSchema = z.object({
@@ -25,4 +26,8 @@ export const EditTask = z.object({
 })
 export const UpdateTask = z.object({
     status:z.boolean()
+})
+export const Posts = z.object({
+    title: z.string().trim().min(2).max(20),
+    description: z.string().trim().min(2),
 })
