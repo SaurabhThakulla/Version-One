@@ -3,6 +3,7 @@ import {
     Text,
     TouchableOpacity,
     Image,
+    Alert,
 } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,8 +23,16 @@ import {
 
 import { RootStackParamList }
     from "../types/types";
+import { signup } from "../api/auth";
+import { useAuthStore } from "../store/authStore";
+
 export default function SignupScreen() {
     const [isAgreed, setIsAgreed] = useState(false);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const setToken = useAuthStore((state) => state.setToken);
 
     type NavigationProp =
         NativeStackNavigationProp<
@@ -31,6 +40,33 @@ export default function SignupScreen() {
         >;
     const navigation =
         useNavigation<NavigationProp>();
+
+    const handleSignup = async () => {
+        if (!isAgreed) {
+            Alert.alert("Terms required", "Please accept the terms to continue.");
+            return;
+        }
+
+        if (!username || !email || !password) {
+            Alert.alert("Missing details", "Please fill in username, email, and password.");
+            return;
+        }
+
+        try {
+            setIsSubmitting(true);
+            const response = await signup({ username, email, password });
+
+            if (!response.token) {
+                throw new Error("Token missing from signup response");
+            }
+
+            await setToken(response.token);
+        } catch (error) {
+            Alert.alert("Signup failed", "Please check your details and try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     return (
         <ScreenWrapper>
             <SmoothScrollView
@@ -55,18 +91,27 @@ export default function SignupScreen() {
                 {/* Form Card */}
                 <View style={styles.formCard}>
                     <CustomInput
-                        label="Full Name"
-                        placeholder="Enter your full name"
+                        label="Username"
+                        placeholder="Enter your username"
+                        value={username}
+                        onChangeText={setUsername}
+                        autoCapitalize="words"
                     />
 
                     <CustomInput
-                        label="Phone Number"
-                        placeholder="Enter your phone number"
+                        label="Email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                     />
 
                     <CustomInput
                         label="Password"
                         placeholder="Create a password"
+                        value={password}
+                        onChangeText={setPassword}
                         secureTextEntry
                         
                     />
@@ -79,41 +124,32 @@ export default function SignupScreen() {
                         accessibilityRole="checkbox"
                         accessibilityState={{ checked: isAgreed }}
                     >
-                        <View style={styles.termsWrapper}>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    console.log("checkbox pressed", !isAgreed);  // 👈 add this
-                                    setIsAgreed((value) => !value);
-                                }}
-                                activeOpacity={0.8}
-                                accessibilityRole="checkbox"
-                                accessibilityState={{ checked: isAgreed }}
-                            >
-                                <View
-                                    style={[
-                                        styles.checkbox,
-                                        isAgreed && styles.checkboxChecked,
-                                    ]}
-                                >
-                                    {isAgreed && (
-                                        <Ionicons
-                                            name="checkmark"
-                                            size={12}
-                                            color="#0D1117"
-                                        />
-                                    )}
-                                </View>
-                            </TouchableOpacity>
-
-                            <Text style={styles.termsText}>
-                                I agree to the{" "}
-                                <Text style={styles.linkText}>Terms of Service</Text>{" "}
-                                and{" "}
-                                <Text style={styles.linkText}>Privacy Policy</Text>
-                            </Text>
+                        <View
+                            style={[
+                                styles.checkbox,
+                                isAgreed && styles.checkboxChecked,
+                            ]}
+                        >
+                            {isAgreed && (
+                                <Ionicons
+                                    name="checkmark"
+                                    size={12}
+                                    color="#0D1117"
+                                />
+                            )}
                         </View>
+
+                        <Text style={styles.termsText}>
+                            I agree to the{" "}
+                            <Text style={styles.linkText}>Terms of Service</Text>{" "}
+                            and{" "}
+                            <Text style={styles.linkText}>Privacy Policy</Text>
+                        </Text>
                     </TouchableOpacity>
-                    <CustomButton title="Create Account ->" onPress={() => navigation.replace("Main")} />
+                    <CustomButton
+                        title={isSubmitting ? "Creating..." : "Create Account"}
+                        onPress={handleSignup}
+                    />
                 </View>
 
                 {/* Divider */}

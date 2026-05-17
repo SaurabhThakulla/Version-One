@@ -4,6 +4,7 @@ import {
     TouchableOpacity,
     Image,
 } from "react-native";
+import { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -13,6 +14,9 @@ import CustomInput from "../components/ui/CustomInput";
 import CustomButton from "../components/ui/CustomButton";
 import SmoothScrollView from "../components/ui/SmoothScrollView";
 import { styles } from "../styling/Auth/signupStyles";
+import { login } from "../api/auth";
+import { useAuthStore } from "../store/authStore";
+import { Alert } from "react-native";
 
 const logo = require("../../assets/logo.png");
 import {
@@ -23,16 +27,44 @@ import { RootStackParamList }
     from "../types/types";
 
 export default function LoginScreen() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const setToken = useAuthStore((state) => state.setToken);
+
     type NavigationProp =
         NativeStackNavigationProp<
             RootStackParamList
         >;
     const navigation =
         useNavigation<NavigationProp>();
+
+    const handleLogin = async () => {
+        if (!email || !password) {
+            Alert.alert("Missing details", "Please fill in email and password.");
+            return;
+        }
+
+        try {
+            setIsSubmitting(true);
+            const response = await login({ email, password });
+
+            if (!response.token) {
+                throw new Error("Token missing from login response");
+            }
+
+            await setToken(response.token);
+        } catch (error) {
+            Alert.alert("Login failed", "Please check your details and try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     return (
         <ScreenWrapper>
             <SmoothScrollView
                 contentContainerStyle={styles.scrollContainer}
+                keyboardShouldPersistTaps="handled"
             >
                 {/* Header */}
                 <View style={styles.headerWrapper}>
@@ -57,25 +89,31 @@ export default function LoginScreen() {
                 {/* Form Card */}
                 <View style={styles.formCard}>
                     <CustomInput
-                        label="Phone Number"
-                        placeholder="Enter your phone number"
+                        label="Email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                     />
 
                     <CustomInput
                         label="Password"
                         placeholder="Enter your password"
+                        value={password}
+                        onChangeText={setPassword}
                         secureTextEntry
                     />
 
                     {/* Forgot Password */}
-                    <TouchableOpacity style={styles.footerWrapper}>
+                    {/* <TouchableOpacity style={styles.footerWrapper}>
                         <Text style={styles.footerLink}>
                             Forgot Password?
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     {/* Button */}
-                    <CustomButton title="Create Account ->" onPress={() => navigation.replace("Main")} />
+                    <CustomButton title={isSubmitting ? "Logging in..." : "Login "} onPress={handleLogin} />
                 </View>
 
                 {/* Divider */}
