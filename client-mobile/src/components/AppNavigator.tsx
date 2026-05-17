@@ -25,12 +25,18 @@ export default function AppNavigator({ token }: AppNavigatorProps) {
                 <Stack.Screen
                     name="Main"
                     component={MainShell}
+                    options={{
+                        sheetResizeAnimationEnabled: false,
+                    }}
                 />
             ) : (
                 <>
                     <Stack.Screen
                         name="PreSignup"
                         component={PreSignupScreen}
+                        options={{
+                            sheetResizeAnimationEnabled: false,
+                        }}
                     />
                     <Stack.Screen
                         name="Login"
